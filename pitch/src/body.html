@@ -268,6 +268,11 @@
     padding:.85rem 1rem;overflow-x:auto;white-space:nowrap;
   }
   .formula-line b{color:var(--figure);font-weight:700}
+  .panel-note{
+    margin-top:1rem;font-size:.83rem;line-height:1.55;color:var(--ink-soft);
+    padding-left:.85rem;border-left:2px solid var(--rule-2);
+  }
+  .panel-note b{color:var(--ink);font-weight:500}
 
   /* teléfono */
   .phone{
@@ -381,6 +386,13 @@
   }
   .btn-loc:hover{border-color:var(--blue)}
   .btn-loc[disabled]{opacity:.55;cursor:default}
+  .hint{margin-top:.7rem;font-size:.79rem;color:var(--ink-faint);line-height:1.5}
+  .svc .mod{
+    display:inline-block;margin-left:.45rem;font-family:var(--display);font-size:.63rem;
+    font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-faint);
+    background:var(--surface-2);border-radius:99px;padding:.1rem .42rem;vertical-align:middle;
+  }
+  .svc.dom .km{color:var(--ink-faint)}
 
   /* ============ POR QUÉ ============ */
   .why-grid{display:grid;gap:1.15rem;margin-top:2.5rem}
@@ -544,9 +556,8 @@
     <span class="sec-label reveal">Lo que ya armé</span>
     <h2 class="reveal">Ya está construido. Juega con los controles.</h2>
     <p class="sec-lede reveal">
-      Dos piezas que ya armé. La primera calcula cuándo se le acaba la comida a una mascota y
-      arma el mensaje de recompra. La segunda usa la ubicación para recomendar servicios. Las dos
-      se mueven.
+      Dos piezas que ya armé, y las dos sirven por partida doble: por dentro para automatizar,
+      y de cara al usuario como algo que puede consultar. Muévelas.
     </p>
 
     <div class="lab">
@@ -554,8 +565,9 @@
         <div class="pet-head">
           <img class="pet-av" src="DOG_IMG" alt="">
           <div>
-            <h3>Rocky · perfil de mascota</h3>
-            <p class="sub">Dos datos que Duwu ya pide y hoy no usa para nada.</p>
+            <h3>Cuánto come y cuánto le queda</h3>
+            <p class="sub">Con el peso y la etapa de vida sale la ración diaria — útil para el
+            dueño — y de ahí, cuándo se acaba el saco.</p>
           </div>
           <img class="bag-img" src="BAG_IMG" alt="Saco de alimento Dog Chow">
         </div>
@@ -586,15 +598,26 @@
         </div>
 
         <div class="readout">
-          <div><span class="k">Consumo</span><span class="v" id="oGrams">400<small> g/día</small></span></div>
-          <div><span class="k">Cobertura</span><span class="v" id="oDays">20<small> días</small></span></div>
-          <div><span class="k">Aviso</span><span class="v" id="oWhen">día 15</span></div>
+          <div><span class="k">Ración diaria</span><span class="v" id="oGrams">400<small> g/día</small></span></div>
+          <div><span class="k">Le dura</span><span class="v" id="oDays">20<small> días</small></span></div>
+          <div><span class="k">Avisamos el</span><span class="v" id="oWhen">día 15</span></div>
         </div>
 
         <div class="formula-line">
-          <b>gramos_día</b> = peso × factor · <b>cobertura</b> = saco ÷ gramos_día ·
-          <b>aviso</b> = compra + cobertura − 5 días
+          <b>ración</b> = peso × factor · <b>duración</b> = saco ÷ ración ·
+          <b>aviso</b> = compra + duración − 5 días
         </div>
+
+        <p class="panel-note">
+          <b>Es una estimación para saber cuándo se acaba el saco.</b> La ración exacta la indica la
+          tabla del fabricante o el veterinario, y el mensaje nunca debería sugerir lo contrario.
+        </p>
+        <p class="panel-note">
+          <b>Y el modelo no manda solo.</b> Desde la segunda compra del mismo producto, el intervalo
+          real del cliente le gana al cálculo: si compra cada 28 días aunque la cuenta diga 33, vale
+          lo que hace, no lo que debería hacer. Cruzar la fórmula con el hábito de compra es lo que
+          evita avisar a destiempo.
+        </p>
       </div>
 
       <div class="reveal">
@@ -617,29 +640,32 @@
         <div class="geo-head">
           <div>
             <h3>Servicios cerca</h3>
-            <p class="sub">Duwu ya tiene veterinarias, peluquerías y hoteles con sus coordenadas, ya usa mapas y ya pide la ubicación — pero solo para entregas.</p>
+            <p class="sub">Duwu ya tiene el catálogo de servicios con sus categorías, ya usa mapas y ya guarda la dirección de entrega. Hoy esa ubicación solo se usa para despachar pedidos.</p>
           </div>
           <span class="proto">Prototipo</span>
         </div>
 
         <div class="ctrl">
-          <span class="lbl">¿Dónde estás? <span class="val" id="zonaOut">Chacao</span></span>
-          <div class="seg" id="segZona" role="group" aria-label="Zona">
+          <span class="lbl">Ubicación registrada <span class="val" id="zonaOut">Chacao</span></span>
+          <div class="seg" id="segZona" role="group" aria-label="Ubicación registrada">
             <button type="button" data-lat="10.4967" data-lon="-66.8544" data-z="Chacao" aria-pressed="true">Chacao</button>
             <button type="button" data-lat="10.4780" data-lon="-66.8630" data-z="Las Mercedes">Las Mercedes</button>
             <button type="button" data-lat="10.5040" data-lon="-66.8880" data-z="La Florida">La Florida</button>
             <button type="button" data-lat="10.4283" data-lon="-66.8264" data-z="El Hatillo">El Hatillo</button>
             <button type="button" class="btn-loc" id="btnLoc">Usar mi ubicación</button>
           </div>
+          <p class="hint">Viene de la dirección de entrega que el usuario ya tiene guardada. No hay que pedirle nada.</p>
         </div>
 
         <div class="ctrl" style="margin-bottom:0">
-          <span class="lbl">Tipo de servicio</span>
-          <div class="seg" id="segTipo" role="group" aria-label="Tipo de servicio">
+          <span class="lbl">Categoría</span>
+          <div class="seg" id="segTipo" role="group" aria-label="Categoría de servicio">
             <button type="button" data-t="todos" aria-pressed="true">Todos</button>
-            <button type="button" data-t="veterinaria">Veterinaria</button>
-            <button type="button" data-t="peluqueria">Peluquería</button>
-            <button type="button" data-t="hotel">Hotel</button>
+            <button type="button" data-t="veterinary">Veterinaria</button>
+            <button type="button" data-t="grooming">Peluquería</button>
+            <button type="button" data-t="hotel">Hospedaje</button>
+            <button type="button" data-t="training">Entrenamiento</button>
+            <button type="button" data-t="transportation">Transporte</button>
           </div>
         </div>
 
@@ -649,10 +675,14 @@
         </div>
 
         <p class="geo-note">
-          Los puntos son datos de ejemplo sobre zonas reales de Caracas, no comercios existentes.
-          Lo que importa es el mecanismo: con los servicios y las coordenadas que Duwu ya tiene
-          cargados, más la ubicación que ya pide, esto se conecta a datos reales sin construir nada
-          nuevo.
+          Las categorías son las de Duwu —Veterinaria, Peluquería, Hospedaje, Entrenamiento,
+          Transporte— y la distinción entre servicio <em>a domicilio</em> y <em>en establecimiento</em>
+          también existe en su modelo. Los puntos del mapa son de ejemplo sobre zonas reales de
+          Caracas, no comercios existentes.
+          <br><br>
+          <b>Un requisito antes de encender esto:</b> en la app las direcciones son texto libre y
+          algunas aparecen como «N/A». Ordenar por cercanía necesita coordenadas, no direcciones
+          escritas a mano. Es trabajo de datos antes que de interfaz.
         </p>
       </div>
     </div>
@@ -807,15 +837,17 @@
     thread.innerHTML =
       '<div class="daysep">' + fecha + '</div>' +
       '<div class="bubble">' +
-        'Hola María 👋 Según lo que compraste, calculamos que a <strong>Rocky</strong> ' +
+        'Hola María 👋 Por el saco que compraste y el peso de <strong>Rocky</strong>, ' +
         'le queda <strong>' + frase + '</strong> de Dog Chow Adultos.' +
+        '<br><br>¿Te lo preparamos para que no se quede sin comida?' +
         '<div class="btns"><span>Sí, repetir pedido</span><span>Ahora no</span></div>' +
         '<div class="time">' + hora + ' ✓✓</div>' +
       '</div>';
 
     document.getElementById("phoneNote").innerHTML =
-      'Se enviaría el <strong style="color:#fff">' + fecha + '</strong>, a los ' + notify +
-      ' días de la compra. Siempre queda como una semana porque le dejo 5 días de colchón a propósito.';
+      'Saldría el <strong style="color:#fff">' + fecha + '</strong>, ' + notify +
+      ' días después de la compra.<br>Siempre 5 días antes de que se acabe el saco: por eso el ' +
+      'mensaje habla de una semana sin importar el tamaño.';
 
     thread.setAttribute("aria-label",
       "Mensaje de ejemplo que se enviaría el " + fecha + ", a los " + notify + " días de la compra.");
@@ -827,14 +859,18 @@
   (function(){
     // Datos de ejemplo. Las coordenadas corresponden a zonas reales de Caracas;
     // los servicios son ilustrativos, no comercios existentes.
+    // Categorías y modalidad tomadas del propio diccionario de Duwu:
+    // veterinary · grooming · hotel · training · transportation
+    // establishment (vas tú) · delivery (van a tu casa)
     var SERVICIOS = [
-      {n:"Veterinaria",        z:"Altamira",         t:"veterinaria", lat:10.4956, lon:-66.8503},
-      {n:"Peluquería canina",  z:"Los Palos Grandes",t:"peluqueria",  lat:10.5003, lon:-66.8449},
-      {n:"Hotel para mascotas",z:"La Castellana",    t:"hotel",       lat:10.4986, lon:-66.8583},
-      {n:"Veterinaria",        z:"Las Mercedes",     t:"veterinaria", lat:10.4780, lon:-66.8630},
-      {n:"Peluquería canina",  z:"Sabana Grande",    t:"peluqueria",  lat:10.4920, lon:-66.8760},
-      {n:"Veterinaria",        z:"Los Dos Caminos",  t:"veterinaria", lat:10.5030, lon:-66.8300},
-      {n:"Hotel para mascotas",z:"El Hatillo",       t:"hotel",       lat:10.4283, lon:-66.8264}
+      {n:"Veterinaria",   z:"Altamira",          t:"veterinary",      m:"establishment", lat:10.4956, lon:-66.8503},
+      {n:"Peluquería",    z:"Los Palos Grandes", t:"grooming",        m:"establishment", lat:10.5003, lon:-66.8449},
+      {n:"Hospedaje",     z:"La Castellana",     t:"hotel",           m:"establishment", lat:10.4986, lon:-66.8583},
+      {n:"Veterinaria",   z:"Las Mercedes",      t:"veterinary",      m:"establishment", lat:10.4780, lon:-66.8630},
+      {n:"Peluquería",    z:"Sabana Grande",     t:"grooming",        m:"delivery",      lat:10.4920, lon:-66.8760},
+      {n:"Entrenamiento", z:"Los Dos Caminos",   t:"training",        m:"delivery",      lat:10.5030, lon:-66.8300},
+      {n:"Hospedaje",     z:"El Hatillo",        t:"hotel",           m:"establishment", lat:10.4283, lon:-66.8264},
+      {n:"Transporte",    z:"La Florida",        t:"transportation",  m:"delivery",      lat:10.5040, lon:-66.8880}
     ];
 
     var yo = {lat:10.4967, lon:-66.8544, z:"Chacao"}, tipo = "todos";
@@ -909,12 +945,16 @@
       mapa.innerHTML = svg;
 
       lista.innerHTML = vis.slice(0,3).map(function(s, i){
-        return '<div class="svc'+(i===0?' top':'')+'" role="listitem">' +
+        var dom = s.m === "delivery";
+        var km = s.d.toFixed(1).replace(".", ",") + " km";
+        return '<div class="svc'+(i===0?' top':'')+(dom?' dom':'')+'" role="listitem">' +
                  '<span class="rk">'+(i+1)+'</span>' +
-                 '<span class="nm">'+s.n+'<span class="zn">'+s.z+'</span></span>' +
-                 '<span class="km">'+s.d.toFixed(1).replace(".",",")+' km</span>' +
+                 '<span class="nm">'+s.n+
+                   '<span class="mod">'+(dom?'a domicilio':'establecimiento')+'</span>' +
+                   '<span class="zn">'+(dom ? 'Cubre desde '+s.z : s.z)+'</span></span>' +
+                 '<span class="km">'+km+'</span>' +
                '</div>';
-      }).join("") || '<div class="svc"><span class="rk">—</span><span class="nm">Sin servicios de ese tipo cerca</span><span class="km"></span></div>';
+      }).join("") || '<div class="svc"><span class="rk">—</span><span class="nm">Sin servicios de esa categoría cerca</span><span class="km"></span></div>';
     }
 
     pinta();
