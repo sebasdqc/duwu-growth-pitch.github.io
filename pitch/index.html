@@ -170,7 +170,7 @@
 
   /* stats */
   .stats{display:grid;gap:1rem;margin-top:2.5rem}
-  @media(min-width:760px){.stats{grid-template-columns:repeat(3,1fr)}}
+  @media(min-width:700px){.stats{grid-template-columns:repeat(2,1fr)}}
   .stat{
     background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-lg);
     padding:1.75rem 1.6rem 1.85rem;box-shadow:var(--shadow);position:relative;overflow:hidden;
@@ -186,6 +186,10 @@
     letter-spacing:-.015em;margin-bottom:.7rem;
   }
   .stat.obs .d{font-size:.92rem}
+  .stat .et{
+    display:block;font-family:var(--display);font-size:.67rem;font-weight:600;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:.75rem;
+  }
   .stat .n.is-word{font-size:2.1rem;letter-spacing:-.03em;margin-bottom:.75rem}
   .mark-ok,.mark-open{
     display:inline-flex;align-items:center;gap:.4rem;font-family:var(--display);
@@ -562,41 +566,55 @@
 <section id="hallazgo">
   <div class="wrap">
     <span class="sec-label reveal">Desde afuera, como usuario</span>
-    <h2 class="reveal">Tres cosas que me quedaron dando vueltas</h2>
+    <h2 class="reveal">Lo que noté, etapa por etapa</h2>
     <p class="sec-lede reveal">
       Usé la app, compré, y noté un par de consideraciones que seguramente tienen una razón que
-      desde afuera no alcanzo a ver. Las comento como observaciones de alguien que usó el producto.
+      desde afuera no alcanzo a ver. Las comento como observaciones de alguien que usó el producto,
+      ordenadas por las cuatro etapas que el rol busca mover.
     </p>
 
     <div class="stats">
       <div class="stat obs reveal">
-        <span class="t">El club existe, pero me enteré tarde</span>
-        <span class="d">Hay niveles, recompensas y código de referidos. No los vi hasta después de
-        crear la cuenta, y la cuenta hace falta para armar el carrito. Lo que te haría volver está
-        detrás de lo primero que te cuesta hacer.</span>
+        <span class="et">Activación</span>
+        <span class="t">Se pide antes de dar</span>
+        <span class="d">Para armar el carrito hace falta una cuenta. Y en el registro se pide el
+        código de referido de otra persona, cuando todavía no he probado nada. Lo que da razones
+        para quedarse —niveles, recompensas— lo vi después de estar dentro.</span>
       </div>
+
       <div class="stat obs reveal">
-        <span class="t">La comida se acaba en una fecha que se puede calcular</span>
+        <span class="et">Conversión</span>
+        <span class="t">La decisión que importa exige cuentas</span>
+        <span class="d">Comprando alimento, lo que uno decide de verdad es qué tamaño llevar. Cada
+        presentación muestra su precio, pero no cuánto sale el kilo, así que la comparación queda
+        de parte del comprador.</span>
+      </div>
+
+      <div class="stat obs reveal">
+        <span class="et">Retención</span>
+        <span class="t">Hay razones para volver que no se ven</span>
+        <span class="d">Existe el club, y también un catálogo de servicios con sus categorías:
+        veterinaria, peluquería, hospedaje, entrenamiento, transporte. La ubicación ya se pide al
+        registrarse, pero hoy solo sirve para despachar el pedido.</span>
+      </div>
+
+      <div class="stat obs reveal">
+        <span class="et">Recurrencia</span>
+        <span class="t">La comida se acaba en una fecha calculable</span>
         <span class="d">Compré un saco. Con el peso de la mascota y el tamaño del saco es posible
-        calcular cuándo se acaba, con bastante más precisión de la que tiene el dueño en la cabeza.
-        Y aun así, el siguiente pedido depende de que él se acuerde.</span>
-      </div>
-      <div class="stat obs reveal">
-        <span class="t">La ubicación solo sirve para entregar</span>
-        <span class="d">Ya se pide al registrarse, y ya existe el catálogo de servicios con sus
-        categorías: veterinaria, peluquería, hospedaje, entrenamiento, transporte. Esos dos datos
-        juntos dan para bastante más que despachar un pedido.</span>
+        calcular cuándo se acaba, con más precisión de la que tiene el dueño en la cabeza. Y aun
+        así, el siguiente pedido depende de que él se acuerde.</span>
       </div>
     </div>
 
     <p class="after-note reveal">
-      <b>Dos de las tres las convertí en algo que se puede tocar</b>, ahí abajo. La primera no la
-      construí porque toca el modelo de negocio y esa no es una decisión que se tome desde afuera;
-      pero es la que empezaría a probar primero, y es barata.
-      <span class="aside">Sobre medición prefiero no opinar de más: pude ver cómo mide la web,
-      pero no sé qué miden las apps ni qué tienen del lado del servidor. Lo que sí traigo es la
-      forma de trabajo — definir el evento, escribir el criterio de decisión antes de lanzar, y
-      dejar un grupo de control para saber si de verdad sirvió.</span>
+      <b>Las dos últimas las convertí en algo que se puede tocar</b>, ahí abajo. Las dos primeras no:
+      tocan decisiones de negocio que no se toman desde afuera. Pero la de activación es la que
+      empezaría a probar primero, porque es barata y el resultado se ve rápido.
+      <span class="aside">Sobre medición prefiero no opinar de más: pude ver cómo mide la web, pero
+      no sé qué miden las apps ni qué hay del lado del servidor. Lo que sí traigo es la forma de
+      trabajo — definir el evento, escribir el criterio de decisión antes de lanzar, y dejar un
+      grupo de control para saber si de verdad sirvió.</span>
     </p>
   </div>
 </section>
