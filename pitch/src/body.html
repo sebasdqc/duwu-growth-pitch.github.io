@@ -149,7 +149,16 @@
   .stat.is-alert::after{background:var(--alert)}
   .stat .n{font-family:var(--display);font-size:3.4rem;font-weight:800;line-height:1;
     letter-spacing:-.045em;font-variant-numeric:tabular-nums;display:block;margin-bottom:.6rem}
-  .stat.is-alert .n{color:var(--alert)}
+  .stat.is-open::after{background:var(--rule-2)}
+  .stat .n.is-word{font-size:2.1rem;letter-spacing:-.03em;margin-bottom:.75rem}
+  .mark-ok,.mark-open{
+    display:inline-flex;align-items:center;gap:.4rem;font-family:var(--display);
+    font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    padding:.22rem .6rem;border-radius:99px;margin-bottom:.9rem;
+  }
+  .mark-ok::before,.mark-open::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+  .mark-ok{color:var(--ok);background:var(--ok-soft,#E4F2E5)}
+  .mark-open{color:var(--ink-faint);background:var(--ground)}
   .stat .n small{font-size:1.3rem;font-weight:600;color:var(--ink-faint)}
   .stat .t{font-family:var(--display);font-weight:600;font-size:.98rem;display:block;margin-bottom:.35rem}
   .stat .d{font-size:.88rem;color:var(--ink-soft);line-height:1.5}
@@ -418,13 +427,14 @@
     <div class="hero-grid">
       <div>
         <span class="eyebrow">Duwu Pet Club</span>
-        <h1>Duwu ya tiene un club. El problema es que <em>nadie lo ve.</em></h1>
+        <h1>Tres superficies. <em>Una sola forma</em> de medir.</h1>
         <p class="lede">
           Hace poco hice mi primera compra en Duwu y el recorrido completo, del onboarding a la
           entrega, me pareció excelente. Llevo <b>5 años en marketing</b>, pasando por growth,
           análisis de datos y desarrollo de producto, y en todo lo que uso termino viendo puntos de
           mejora. Más aún en un proyecto que resuelve algo tan necesario en Caracas, y ojalá pronto
-          en toda Venezuela. Acá te dejo lo que vi, y lo que armé con eso.
+          en toda Venezuela. Duwu vende por web, iOS y Android: <b>el punto donde más valor veo es
+          en estandarizar cómo se mide en las tres</b>. Acá te dejo lo que vi, y lo que armé con eso.
         </p>
         <div class="cta-row">
           <a class="btn btn-primary" href="#demo">Mira lo que armé ↓</a>
@@ -443,37 +453,48 @@
 <!-- ==================== HALLAZGO ==================== -->
 <section id="hallazgo">
   <div class="wrap">
-    <span class="sec-label reveal">Lo que encontré</span>
-    <h2 class="reveal">Busqué unas 25 herramientas de analítica en el código. Encontré una.</h2>
+    <span class="sec-label reveal">Lo que puedo verificar y lo que no</span>
+    <h2 class="reveal">Miré la web a fondo. De las apps no puedo afirmar nada.</h2>
     <p class="sec-lede reveal">
-      Es el Meta Pixel, con los siete eventos típicos de una tienda. No hay nada más: ni analítica
-      de producto, ni feature flags, ni grabación de sesión.
+      Todo lo que traigo salió de revisar el sitio público. Es lo que cualquiera puede comprobar
+      desde afuera, y justo por eso tiene un límite que prefiero poner por delante.
     </p>
 
     <div class="stats">
       <div class="stat reveal">
-        <span class="n" data-count="7">0</span>
-        <span class="t">Eventos hoy</span>
-        <span class="d">Todos del Meta Pixel. Sirve para atribuir anuncios, no para entender qué hace la gente dentro del producto.</span>
+        <span class="n is-word">Web</span>
+        <span class="mark-ok">Verificado</span>
+        <span class="t">El Pixel está bien puesto</span>
+        <span class="d">Meta Pixel activo y configurado, disparando los siete eventos de comercio.
+        ViewContent llega con identificador de producto, valor y moneda.</span>
       </div>
-      <div class="stat is-alert reveal">
-        <span class="n"><span data-count="0">0</span><small> / 8</small></span>
-        <span class="t">Eventos del club</span>
-        <span class="d">Hoy nadie sabe cuánta gente sube de nivel, canjea una recompensa o comparte su código de referido.</span>
+      <div class="stat is-open reveal">
+        <span class="n is-word">iOS</span>
+        <span class="mark-open">Sin verificar</span>
+        <span class="t">No puedo saber qué mide</span>
+        <span class="d">La app puede tener una analítica distinta a la de la web, o la misma. Desde
+        afuera no hay forma de confirmarlo.</span>
       </div>
-      <div class="stat is-alert reveal">
-        <span class="n" data-count="0">0</span>
-        <span class="t">Herramientas de experimentación</span>
-        <span class="d">Sin feature flags no se puede correr un A/B test. Falta la herramienta, no es cuestión de método.</span>
+      <div class="stat is-open reveal">
+        <span class="n is-word">Android</span>
+        <span class="mark-open">Sin verificar</span>
+        <span class="t">Misma pregunta abierta</span>
+        <span class="d">Y si cada superficie mide con criterios distintos, los resultados dejan de
+        ser comparables entre ellas.</span>
       </div>
     </div>
 
     <p class="after-note reveal">
-      <b>Y hay otra cosa:</b> todo el club está detrás del registro, y registrarse es obligatorio
-      para poder agregar algo al carrito. O sea que lo que haría que alguien se quede está escondido
-      justo detrás de lo que más le cuesta hacer.
-      <span class="aside">Puede ser una decisión propia del producto que yo no alcanzo a ver desde
-      afuera. Lo pongo como apreciación de usuario, no como diagnóstico.</span>
+      <b>Por eso el primer trabajo no es medir más, es acordar cómo se mide.</b> Un solo diccionario
+      de eventos, con los mismos nombres y las mismas propiedades en web, iOS y Android. Una
+      definición escrita de qué cuenta como activación, como conversión y como recompra. Y feature
+      flags para poder encender un experimento por superficie y leerlo con el mismo criterio.
+      Sin ese estándar, cada medición responde una pregunta distinta y ninguna se puede comparar
+      con la anterior.
+      <span class="aside">Otra cosa que noté como usuario: el club de lealtad no se ve hasta después
+      de registrarse, y registrarse es obligatorio para armar el carrito. Puede ser una decisión
+      propia del producto que yo no alcanzo a ver desde afuera; lo dejo como apreciación, no como
+      diagnóstico.</span>
     </p>
   </div>
 </section>
