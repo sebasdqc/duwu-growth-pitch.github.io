@@ -31,8 +31,8 @@ SITIO = "https://duwu-growth-pitch.vercel.app"
 CORREO = "sebastiancordero08@gmail.com"
 URL_PLAN = "https://claude.ai/code/artifact/7a8b9beb-0aa8-4090-821c-5fc7e9378ff4"
 DESCRIPCION = (
-    "Tres cosas que noté comprando en Duwu, y dos herramientas que construí a "
-    "partir de ahí: cálculo de reposición y servicios por cercanía."
+    "Lo que noté comprando en Duwu, ordenado por activación, conversión, "
+    "retención y recurrencia — y dos herramientas construidas a partir de ahí."
 )
 
 # El contenido se parte aquí: lo de arriba va al <head>, lo de abajo al <body>.
