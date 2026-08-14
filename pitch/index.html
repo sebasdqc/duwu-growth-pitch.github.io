@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#00388b">
-<meta name="description" content="Duwu vende por web, iOS y Android. Análisis y propuesta para estandarizar la medición entre las tres, con dos herramientas ya construidas.">
+<meta name="description" content="Tres cosas que noté comprando en Duwu, y dos herramientas que construí a partir de ahí: cálculo de reposición y servicios por cercanía.">
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_VE">
 <meta property="og:url" content="https://duwu-growth-pitch.vercel.app">
-<meta property="og:title" content="Tres superficies. Una sola forma de medir.">
-<meta property="og:description" content="Duwu vende por web, iOS y Android. Análisis y propuesta para estandarizar la medición entre las tres, con dos herramientas ya construidas.">
+<meta property="og:title" content="Lo que vi comprando, y lo que armé con eso.">
+<meta property="og:description" content="Tres cosas que noté comprando en Duwu, y dos herramientas que construí a partir de ahí: cálculo de reposición y servicios por cercanía.">
 <meta property="og:image" content="https://duwu-growth-pitch.vercel.app/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -180,6 +180,12 @@
   .stat .n{font-family:var(--display);font-size:3.4rem;font-weight:800;line-height:1;
     letter-spacing:-.045em;font-variant-numeric:tabular-nums;display:block;margin-bottom:.6rem}
   .stat.is-open::after{background:var(--rule-2)}
+  .stat.obs::after{background:var(--yellow)}
+  .stat.obs .t{
+    font-family:var(--display);font-size:1.12rem;font-weight:600;line-height:1.28;
+    letter-spacing:-.015em;margin-bottom:.7rem;
+  }
+  .stat.obs .d{font-size:.92rem}
   .stat .n.is-word{font-size:2.1rem;letter-spacing:-.03em;margin-bottom:.75rem}
   .mark-ok,.mark-open{
     display:inline-flex;align-items:center;gap:.4rem;font-family:var(--display);
@@ -529,14 +535,14 @@
     <div class="hero-grid">
       <div>
         <span class="eyebrow">Duwu Pet Club</span>
-        <h1>Tres superficies. <em>Una sola forma</em> de medir.</h1>
+        <h1>Lo que vi comprando, <em>y lo que armé</em> con eso.</h1>
         <p class="lede">
           Hace poco hice mi primera compra en Duwu y el recorrido completo, del onboarding a la
           entrega, me pareció excelente. Llevo <b>5 años en marketing</b>, pasando por growth,
           análisis de datos y desarrollo de producto, y en todo lo que uso termino viendo puntos de
           mejora. Más aún en un proyecto que resuelve algo tan necesario en Caracas, y ojalá pronto
-          en toda Venezuela. Duwu vende por web, iOS y Android: <b>el punto donde más valor veo es
-          en estandarizar cómo se mide en las tres</b>. Acá te dejo lo que vi, y lo que armé con eso.
+          en toda Venezuela. <b>Esto no es una auditoría</b> — no conozco sus datos ni sus razones.
+          Es lo que noté desde afuera, y dos cosas que construí a partir de ahí.
         </p>
         <div class="cta-row">
           <a class="btn btn-primary" href="#demo">Mira lo que armé ↓</a>
@@ -555,48 +561,43 @@
 <!-- ==================== HALLAZGO ==================== -->
 <section id="hallazgo">
   <div class="wrap">
-    <span class="sec-label reveal">Lo que puedo verificar y lo que no</span>
-    <h2 class="reveal">Miré la web a fondo. De las apps no puedo afirmar nada.</h2>
+    <span class="sec-label reveal">Desde afuera, como usuario</span>
+    <h2 class="reveal">Tres cosas que me quedaron dando vueltas</h2>
     <p class="sec-lede reveal">
-      Todo lo que traigo salió de revisar el sitio público. Es lo que cualquiera puede comprobar
-      desde afuera, y justo por eso tiene un límite que prefiero poner por delante.
+      Compré, me moví por la app y anoté lo que me llamó la atención. Varias de estas cosas
+      seguramente tienen una razón que desde afuera no alcanzo a ver — las dejo como observaciones
+      de alguien que usó el producto, no como diagnóstico.
     </p>
 
     <div class="stats">
-      <div class="stat reveal">
-        <span class="n is-word">Web</span>
-        <span class="mark-ok">Verificado</span>
-        <span class="t">El Pixel está bien puesto</span>
-        <span class="d">Meta Pixel activo y configurado, disparando los siete eventos de comercio.
-        ViewContent llega con identificador de producto, valor y moneda.</span>
+      <div class="stat obs reveal">
+        <span class="t">El club existe, pero me enteré tarde</span>
+        <span class="d">Hay niveles, recompensas y código de referidos. No los vi hasta después de
+        crear la cuenta, y la cuenta hace falta para armar el carrito. Lo que te haría volver está
+        detrás de lo primero que te cuesta hacer.</span>
       </div>
-      <div class="stat is-open reveal">
-        <span class="n is-word">iOS</span>
-        <span class="mark-open">Sin verificar</span>
-        <span class="t">No puedo saber qué mide</span>
-        <span class="d">La app puede tener una analítica distinta a la de la web, o la misma. Desde
-        afuera no hay forma de confirmarlo.</span>
+      <div class="stat obs reveal">
+        <span class="t">La comida se acaba en una fecha que se puede calcular</span>
+        <span class="d">Compré un saco. Con el peso de la mascota y el tamaño del saco, ustedes
+        pueden estimar cuándo se acaba mejor que yo. Y sin embargo el siguiente pedido depende de
+        que yo me acuerde.</span>
       </div>
-      <div class="stat is-open reveal">
-        <span class="n is-word">Android</span>
-        <span class="mark-open">Sin verificar</span>
-        <span class="t">Misma pregunta abierta</span>
-        <span class="d">Y si cada superficie mide con criterios distintos, los resultados dejan de
-        ser comparables entre ellas.</span>
+      <div class="stat obs reveal">
+        <span class="t">La ubicación solo sirve para entregar</span>
+        <span class="d">Ya la piden, y ya tienen el catálogo de servicios con sus categorías:
+        veterinaria, peluquería, hospedaje, entrenamiento, transporte. Esos dos datos juntos dan
+        para bastante más que despachar un pedido.</span>
       </div>
     </div>
 
     <p class="after-note reveal">
-      <b>Por eso el primer trabajo no es medir más, es acordar cómo se mide.</b> Un solo diccionario
-      de eventos, con los mismos nombres y las mismas propiedades en web, iOS y Android. Una
-      definición escrita de qué cuenta como activación, como conversión y como recompra. Y feature
-      flags para poder encender un experimento por superficie y leerlo con el mismo criterio.
-      Sin ese estándar, cada medición responde una pregunta distinta y ninguna se puede comparar
-      con la anterior.
-      <span class="aside">Otra cosa que noté como usuario: el club de lealtad no se ve hasta después
-      de registrarse, y registrarse es obligatorio para armar el carrito. Puede ser una decisión
-      propia del producto que yo no alcanzo a ver desde afuera; lo dejo como apreciación, no como
-      diagnóstico.</span>
+      <b>Dos de las tres las convertí en algo que se puede tocar</b>, ahí abajo. La primera no la
+      construí porque toca su modelo de negocio y no me corresponde decidirlo desde afuera; pero es
+      la que empezaría a probar primero, y es barata.
+      <span class="aside">Sobre medición prefiero no opinar de más: pude ver cómo mide la web,
+      pero no sé qué miden las apps ni qué tienen del lado del servidor. Lo que sí traigo es la
+      forma de trabajo — definir el evento, escribir el criterio de decisión antes de lanzar, y
+      dejar un grupo de control para saber si de verdad sirvió.</span>
     </p>
   </div>
 </section>

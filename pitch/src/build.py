@@ -31,8 +31,8 @@ SITIO = "https://duwu-growth-pitch.vercel.app"
 CORREO = "sebastiancordero08@gmail.com"
 URL_PLAN = "https://claude.ai/code/artifact/7a8b9beb-0aa8-4090-821c-5fc7e9378ff4"
 DESCRIPCION = (
-    "Duwu vende por web, iOS y Android. Análisis y propuesta para estandarizar "
-    "la medición entre las tres, con dos herramientas ya construidas."
+    "Tres cosas que noté comprando en Duwu, y dos herramientas que construí a "
+    "partir de ahí: cálculo de reposición y servicios por cercanía."
 )
 
 # El contenido se parte aquí: lo de arriba va al <head>, lo de abajo al <body>.
@@ -107,7 +107,7 @@ def main() -> int:
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_VE">
 <meta property="og:url" content="{SITIO}">
-<meta property="og:title" content="Tres superficies. Una sola forma de medir.">
+<meta property="og:title" content="Lo que vi comprando, y lo que armé con eso.">
 <meta property="og:description" content="{DESCRIPCION}">
 <meta property="og:image" content="{SITIO}/og.jpg">
 <meta property="og:image:width" content="1200">
