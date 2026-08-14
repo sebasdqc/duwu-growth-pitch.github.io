@@ -308,8 +308,10 @@
   .formula-line{
     margin-top:1.4rem;font-family:var(--mono);font-size:.755rem;line-height:1.7;
     color:var(--ink-faint);background:var(--ground);border-radius:var(--r);
-    padding:.85rem 1rem;overflow-x:auto;white-space:nowrap;
+    padding:.85rem 1rem;display:flex;flex-wrap:wrap;gap:.2rem 1.1rem;
   }
+  .formula-line span{white-space:nowrap}
+  .formula-line span+span::before{content:"·";margin-right:1.1rem;color:var(--rule-2)}
   .formula-line b{color:var(--figure);font-weight:700}
   .panel-note{
     margin-top:1rem;font-size:.83rem;line-height:1.55;color:var(--ink-soft);
@@ -500,8 +502,8 @@
     .readout div:first-child{grid-column:1 / -1}
     .readout .v{font-size:1.3rem}
 
-    /* En pantalla chica la fórmula se lee mejor envuelta que desplazándose */
-    .formula-line{white-space:normal;line-height:1.9;font-size:.72rem}
+    .formula-line{line-height:1.85;font-size:.72rem;gap:.15rem .8rem}
+    .formula-line span+span::before{margin-right:.8rem}
     .panel-note{font-size:.8rem}
 
     .geo-body{gap:1rem}
@@ -522,6 +524,43 @@
     .readout{grid-template-columns:1fr}
     .readout div:first-child{grid-column:auto}
   }
+
+  /* ============ CONTACTO ============ */
+  .ct-backdrop{
+    position:fixed;inset:0;background:rgba(6,16,32,.62);backdrop-filter:blur(3px);
+    display:none;align-items:center;justify-content:center;padding:1.25rem;z-index:60;
+  }
+  .ct-backdrop.open{display:flex;animation:fade .18s ease both}
+  @keyframes fade{from{opacity:0}}
+  .ct-card{
+    background:var(--surface);color:var(--ink);border-radius:var(--r-lg);
+    width:min(400px,100%);padding:1.7rem 1.6rem 1.5rem;box-shadow:var(--shadow-lg);
+    position:relative;text-align:left;animation:rise .22s cubic-bezier(.2,.9,.3,1.2) both;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(14px) scale(.98)}}
+  .ct-card h3{font-size:1.24rem;font-weight:700;margin-bottom:.3rem}
+  .ct-card .ct-role{font-family:var(--display);font-size:.83rem;color:var(--ink-faint);margin-bottom:1.35rem}
+  .ct-close{
+    position:absolute;top:.85rem;right:.85rem;width:34px;height:34px;border-radius:50%;
+    border:1px solid var(--rule);background:var(--ground);color:var(--ink-soft);
+    font-size:1.1rem;line-height:1;cursor:pointer;display:grid;place-items:center;
+  }
+  .ct-close:hover{border-color:var(--rule-2);color:var(--ink)}
+  .ct-list{display:grid;gap:.5rem}
+  .ct-row{
+    display:grid;grid-template-columns:34px 1fr;gap:.8rem;align-items:center;
+    padding:.65rem .75rem;border-radius:var(--r);border:1px solid var(--rule);
+    background:var(--ground);text-decoration:none;color:inherit;transition:all .15s ease;
+  }
+  a.ct-row:hover{border-color:var(--blue);background:var(--surface-2)}
+  .ct-row .ic-s{
+    width:34px;height:34px;border-radius:10px;background:var(--navy);color:var(--yellow);
+    display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:.78rem;
+  }
+  .ct-row .k{display:block;font-family:var(--display);font-size:.66rem;font-weight:600;
+    letter-spacing:.11em;text-transform:uppercase;color:var(--ink-faint)}
+  .ct-row .v{display:block;font-family:var(--display);font-size:.9rem;font-weight:500;
+    word-break:break-word;line-height:1.35}
 
   :focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:6px}
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.3,1)}
@@ -549,12 +588,10 @@
           entrega, me pareció excelente. Llevo <b>5 años en marketing</b>, pasando por growth,
           análisis de datos y desarrollo de producto, y en todo lo que uso termino viendo puntos de
           mejora. Más aún en un proyecto que resuelve algo tan necesario en Caracas, y ojalá pronto
-          en toda Venezuela. <b>Esto no es una auditoría</b> — no conozco los datos internos ni las razones
-          detrás de cada decisión. Es lo que noté, y dos cosas que construí a partir de ahí.
+          en toda Venezuela.
         </p>
         <div class="cta-row">
           <a class="btn btn-primary" href="#demo">Mira lo que armé ↓</a>
-          <a class="btn btn-ghost" href="https://claude.ai/code/artifact/7a8b9beb-0aa8-4090-821c-5fc7e9378ff4" target="_blank" rel="noopener">Ver el plan completo</a>
         </div>
       </div>
 
@@ -580,45 +617,43 @@
     <div class="stats">
       <div class="stat obs reveal">
         <span class="et">Activación</span>
-        <span class="t">Se pide antes de dar</span>
-        <span class="d">Para armar el carrito hace falta crear una cuenta. Y el club —niveles,
-        recompensas— recién lo vi una vez adentro. Se pide el registro antes de mostrar lo que se
-        gana con él.</span>
+        <span class="t">El carrito pide cuenta antes de tiempo</span>
+        <span class="d">Para armar el carrito hace falta crear una cuenta, y eso genera fricción
+        justo en el momento donde más se juega la retención de un usuario nuevo. Dar la opción de
+        entrar sin tener cuenta quita ese obstáculo.</span>
       </div>
 
       <div class="stat obs reveal">
         <span class="et">Conversión</span>
-        <span class="t">La decisión que importa exige cuentas</span>
-        <span class="d">Comprando alimento, lo que uno decide de verdad es qué tamaño llevar. Cada
-        presentación muestra su precio, pero no cuánto sale el kilo, así que la comparación queda
-        de parte del comprador.</span>
+        <span class="t">Prever la recompra y acompañarla</span>
+        <span class="d">Las compras recurrentes se pueden prever y notificar, siempre personalizando
+        según lo que requiere cada mascota. Y una buena estrategia de ventas cruzadas, en este
+        sector, suele ser muy beneficiosa.</span>
       </div>
 
       <div class="stat obs reveal">
         <span class="et">Retención</span>
-        <span class="t">Hay razones para volver que no se ven</span>
-        <span class="d">Existe el club, y también un catálogo de servicios con sus categorías:
-        veterinaria, peluquería, hospedaje, entrenamiento, transporte. La ubicación ya se pide al
-        registrarse, pero hoy solo sirve para despachar el pedido.</span>
+        <span class="t">Un ecosistema donde experimentar</span>
+        <span class="d">Formalizar el sistema de loyalty y profundizar en el catálogo de servicios
+        —veterinaria, peluquería, hospedaje, entrenamiento, transporte—: ahí hay un ecosistema donde
+        aplicar experimentos nuevos.</span>
       </div>
 
       <div class="stat obs reveal">
         <span class="et">Recurrencia</span>
-        <span class="t">La comida se acaba en una fecha calculable</span>
-        <span class="d">Compré un saco. Con el peso de la mascota y el tamaño del saco es posible
-        calcular cuándo se acaba, con más precisión de la que tiene el dueño en la cabeza. Y aun
-        así, el siguiente pedido depende de que él se acuerde.</span>
+        <span class="t">¿Qué momentos alargan el LTV?</span>
+        <span class="d">La comida se acaba y la necesidad no se detiene. Compré un saco: hay tablas
+        de referencia, o la recomendación del veterinario, que permiten cuantificar el consumo — y
+        más aún cuando hacerlo trae un beneficio. La pregunta es qué momentos clave desencadenan el
+        alargamiento del LTV.</span>
       </div>
     </div>
 
     <p class="after-note reveal">
-      <b>Las dos últimas las convertí en algo que se puede tocar</b>, ahí abajo. Las dos primeras no:
-      tocan decisiones de negocio que no se toman desde afuera. Pero la de activación es la que
-      empezaría a probar primero, porque es barata y el resultado se ve rápido.
-      <span class="aside">Sobre medición prefiero no opinar de más: pude ver cómo mide la web, pero
-      no sé qué miden las apps ni qué hay del lado del servidor. Lo que sí traigo es la forma de
-      trabajo — definir el evento, escribir el criterio de decisión antes de lanzar, y dejar un
-      grupo de control para saber si de verdad sirvió.</span>
+      <b>Sobre medición prefiero no opinar de más:</b> pude ver cómo mide la web, pero no sé qué
+      miden las apps ni qué hay del lado del servidor. Lo que sí traigo es la forma de trabajo —
+      definir el evento, escribir el criterio de decisión antes de lanzar, y dejar un grupo de
+      control para saber si de verdad sirvió.
     </p>
   </div>
 </section>
@@ -654,9 +689,9 @@
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-3-6.7"/><path d="M21 3v6h-6"/></svg></div>
         <h3>Retener</h3>
         <p>
-          La comida se acaba en una fecha que se puede calcular. Convertir eso en recompra
-          automática, con un grupo de control para saber si de verdad está sumando. WhatsApp,
-          push y correo, cada uno donde el momento y el costo lo justifican.
+          Todo se puede calcular. Convertir los hábitos de consumo en recompra automática, con
+          un grupo que no recibe nada para distinguir lo que aportó el mensaje de lo que iba a pasar
+          igual. WhatsApp, push y correo, cada uno donde el momento y el costo lo justifican.
         </p>
       </div>
     </div>
@@ -667,10 +702,10 @@
 <section class="demo" id="demo">
   <div class="wrap">
     <span class="sec-label reveal">Lo que ya armé</span>
-    <h2 class="reveal">Ya está construido. Juega con los controles.</h2>
+    <h2 class="reveal">Ya está construido.</h2>
     <p class="sec-lede reveal">
       Dos piezas que ya armé, y las dos sirven por partida doble: por dentro para automatizar,
-      y de cara al usuario como algo que puede consultar. Muévelas.
+      y de cara al usuario como algo que puede consultar.
     </p>
 
     <div class="lab">
@@ -717,8 +752,9 @@
         </div>
 
         <div class="formula-line">
-          <b>ración</b> = peso × factor · <b>duración</b> = saco ÷ ración ·
-          <b>aviso</b> = compra + duración − 5 días
+          <span><b>ración</b> = peso × factor</span>
+          <span><b>duración</b> = saco ÷ ración</span>
+          <span><b>aviso</b> = compra + duración − 5 días</span>
         </div>
 
         <p class="panel-note">
@@ -798,7 +834,7 @@
           también existe en su modelo. Los puntos del mapa son de ejemplo sobre zonas reales de
           Caracas, no comercios existentes.
           <br><br>
-          <b>Un requisito antes de encender esto:</b> en la app las direcciones son texto libre y
+          <b>Requisitos mínimos para implementar:</b> en la app las direcciones son texto libre y
           algunas aparecen como «N/A». Ordenar por cercanía necesita coordenadas, no direcciones
           escritas a mano. Es trabajo de datos antes que de interfaz.
         </p>
@@ -833,9 +869,9 @@
       <div class="why reveal">
         <h3>Con qué trabajo todos los días</h3>
         <p>
-          Claude Code y Supabase a diario. Creé un CRM a la medida y he desplegado productos en
-          DigitalOcean. Todo con estándares de medición y experimentación, iterando hasta llegar a
-          lo que esperábamos.
+          Claude Code y n8n a diario. Looker Studio, HubSpot y Power BI antes de pasar a
+          dashboards y CRM hechos a la medida, por control y autonomía. Todo con estándares de
+          medición y experimentación, iterando hasta llegar a lo que esperábamos.
         </p>
       </div>
       <div class="why reveal">
@@ -856,20 +892,70 @@
     <span class="sec-label reveal" style="justify-content:center">Hablemos</span>
     <h2 class="reveal">El primer experimento nos está esperando</h2>
     <p class="sec-lede reveal">
-      Meterle los puntos ganados y el progreso de nivel al mensaje de confirmación que ya
-      mandan. No cuesta nada, no hay que instrumentar nada nuevo, y sirve para saber si el club de
-      verdad hace que la gente vuelva a comprar.
+      Meterle los puntos ganados y el progreso de nivel al mensaje de confirmación que ya se
+      envía.
     </p>
     <div class="cta-row reveal">
-      <a class="btn btn-primary" href="mailto:sebastiancordero08@gmail.com?subject=Product%20%26%20Lifecycle%20Growth%20%C2%B7%20Duwu">Escríbeme</a>
-      <a class="btn btn-ghost" href="https://claude.ai/code/artifact/7a8b9beb-0aa8-4090-821c-5fc7e9378ff4" target="_blank" rel="noopener">Leer el plan completo</a>
+      <button type="button" class="btn btn-primary" id="btnContacto"
+              aria-haspopup="dialog" aria-controls="contacto">Escríbeme</button>
     </div>
   </div>
 </section>
 
+<div class="ct-backdrop" id="contacto" role="dialog" aria-modal="true" aria-labelledby="ctTitulo">
+  <div class="ct-card">
+    <button type="button" class="ct-close" id="ctCerrar" aria-label="Cerrar">&times;</button>
+    <h3 id="ctTitulo">Sebastián Quijada</h3>
+    <p class="ct-role">Product &amp; Lifecycle Growth</p>
+    <div class="ct-list">
+      <a class="ct-row" href="mailto:sebastiancordero08@gmail.com?subject=Product%20%26%20Lifecycle%20Growth%20%C2%B7%20Duwu">
+        <span class="ic-s">@</span>
+        <span><span class="k">Correo</span><span class="v">sebastiancordero08@gmail.com</span></span>
+      </a>
+      <a class="ct-row" href="https://wa.me/584140000000" target="_blank" rel="noopener">
+        <span class="ic-s">WA</span>
+        <span><span class="k">WhatsApp</span><span class="v">+58 414 000 0000</span></span>
+      </a>
+      <a class="ct-row" href="https://www.linkedin.com/in/sebastianquijada" target="_blank" rel="noopener">
+        <span class="ic-s">in</span>
+        <span><span class="k">LinkedIn</span><span class="v">linkedin.com/in/sebastianquijada</span></span>
+      </a>
+      <div class="ct-row">
+        <span class="ic-s">CCS</span>
+        <span><span class="k">Ubicación</span><span class="v">Caracas, Venezuela</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){
   "use strict";
+
+  /* ---------- tarjeta de contacto ---------- */
+  (function(){
+    var abrir = document.getElementById("btnContacto"),
+        caja  = document.getElementById("contacto"),
+        cerrar= document.getElementById("ctCerrar"),
+        antes = null;
+    function open(){
+      antes = document.activeElement;
+      caja.classList.add("open");
+      document.body.style.overflow = "hidden";
+      cerrar.focus();
+    }
+    function close(){
+      caja.classList.remove("open");
+      document.body.style.overflow = "";
+      if(antes) antes.focus();
+    }
+    abrir.addEventListener("click", open);
+    cerrar.addEventListener("click", close);
+    caja.addEventListener("click", function(e){ if(e.target === caja) close(); });
+    document.addEventListener("keydown", function(e){
+      if(e.key === "Escape" && caja.classList.contains("open")) close();
+    });
+  })();
 
   /* ---------- animaciones de entrada ---------- */
   var io = new IntersectionObserver(function(es){
