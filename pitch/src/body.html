@@ -1,3 +1,4 @@
+<meta name="robots" content="noindex, nofollow">
 <title>Sebastián Quijada · Product & Lifecycle Growth para Duwu</title>
 
 <!--FONTS-->
@@ -167,8 +168,7 @@
   /* aportes */
   .band{background:var(--surface)}
   .cards{display:grid;gap:1.15rem;margin-top:2.5rem}
-  @media(min-width:820px){.cards{grid-template-columns:repeat(2,1fr)}}
-  @media(min-width:1060px){.cards{grid-template-columns:repeat(4,1fr)}}
+  @media(min-width:820px){.cards{grid-template-columns:repeat(3,1fr)}}
   .card{
     background:var(--ground);border:1px solid var(--rule);border-radius:var(--r-lg);
     padding:1.7rem 1.6rem 1.8rem;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
@@ -316,6 +316,63 @@
   }
   .proof span::before{content:"✓";color:var(--yellow);font-weight:700}
 
+  /* geo */
+  .geo{margin-top:1.5rem}
+  .geo .panel{padding-bottom:1.6rem}
+  .geo-head{display:flex;align-items:flex-start;gap:.8rem;flex-wrap:wrap;margin-bottom:1.5rem}
+  .geo-head > div{flex:1 1 14rem;min-width:0}
+  .geo-head h3{margin-bottom:.15rem}
+  .geo-head .sub{margin-bottom:0}
+  .proto{
+    font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--partial,#9A6100);background:#FDF3D7;
+    border-radius:99px;padding:.25rem .6rem;white-space:nowrap;flex:none;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .proto{color:#FFD700;background:#332B08}}
+  :root[data-theme="dark"] .proto{color:#FFD700;background:#332B08}
+
+  .geo-body{display:grid;gap:1.4rem;margin-top:1.6rem}
+  @media(min-width:720px){.geo-body{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)}}
+
+  .mapa{
+    background:var(--ground);border:1px solid var(--rule);border-radius:var(--r);
+    padding:.5rem;position:relative;
+  }
+  .mapa svg{display:block;width:100%;height:auto;border-radius:8px}
+  .mapa .me{fill:var(--blue);stroke:#fff;stroke-width:2.2}
+  .mapa .pt{fill:var(--rule-2);transition:fill .2s ease,r .2s ease}
+  .mapa .pt.near{fill:var(--figure)}
+  .mapa .lnk{stroke:var(--blue);stroke-width:1.1;stroke-dasharray:3 3;opacity:.55}
+  .mapa .rnk{font-family:var(--display);font-size:7px;font-weight:700;fill:var(--surface);text-anchor:middle}
+
+  .lista{display:grid;gap:.5rem;align-content:start}
+  .svc{
+    display:grid;grid-template-columns:2rem 1fr auto;gap:.7rem;align-items:center;
+    background:var(--ground);border:1px solid var(--rule);border-radius:var(--r);
+    padding:.7rem .85rem;transition:border-color .2s ease,transform .2s ease;
+  }
+  .svc.top{border-color:var(--blue);background:var(--surface-2);transform:translateX(2px)}
+  .svc .rk{
+    font-family:var(--display);font-size:.8rem;font-weight:700;color:var(--ink-faint);
+    text-align:center;font-variant-numeric:tabular-nums;
+  }
+  .svc.top .rk{color:var(--figure)}
+  .svc .nm{font-family:var(--display);font-size:.87rem;font-weight:600;line-height:1.3;min-width:0}
+  .svc .zn{display:block;font-weight:400;font-size:.76rem;color:var(--ink-faint)}
+  .svc .km{font-family:var(--mono);font-size:.82rem;font-weight:700;color:var(--figure);white-space:nowrap}
+  .geo-note{
+    margin-top:1.3rem;font-size:.8rem;line-height:1.55;color:var(--ink-faint);
+    border-top:1px solid var(--rule);padding-top:.95rem;
+  }
+  .btn-loc{
+    font-family:var(--display);font-size:.8rem;font-weight:600;
+    padding:.45rem .9rem;border-radius:99px;cursor:pointer;
+    background:var(--surface-2);border:1.5px solid var(--rule-2);color:var(--figure);
+    display:inline-flex;align-items:center;gap:.4rem;transition:all .15s ease;
+  }
+  .btn-loc:hover{border-color:var(--blue)}
+  .btn-loc[disabled]{opacity:.55;cursor:default}
+
   /* ============ POR QUÉ ============ */
   .why-grid{display:grid;gap:1.15rem;margin-top:2.5rem}
   @media(min-width:820px){.why-grid{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}}
@@ -378,7 +435,6 @@
       <div class="portrait">
         <span class="ring" aria-hidden="true"></span>
         <img src="CAT_IMG" alt="Gato, una de las categorías de Duwu Pet Club">
-        <span class="badge"><span class="pulse"></span>0 eventos del club medidos</span>
       </div>
     </div>
   </div>
@@ -426,11 +482,10 @@
 <section class="band" id="aporto">
   <div class="wrap">
     <span class="sec-label reveal">Lo que puedo aportar</span>
-    <h2 class="reveal">Cuatro cosas que puedo aportar</h2>
+    <h2 class="reveal">Tres cosas, en este orden</h2>
     <p class="sec-lede reveal">
-      Las tres primeras van en ese orden y el orden importa: si no mides, no sabes qué optimizar,
-      y si la gente ni llega a comprar no hay nada que retener. La cuarta es una idea aparte, armada
-      con piezas que ustedes ya tienen.
+      Pongo el orden porque importa. Si no mides, no sabes qué optimizar. Y si la gente ni llega
+      a comprar, no hay nada que retener.
     </p>
 
     <div class="cards">
@@ -458,15 +513,6 @@
           automática por WhatsApp, con un grupo de control para saber si de verdad está sumando.
         </p>
       </div>
-      <div class="card reveal">
-        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
-        <h3>Servicios cerca</h3>
-        <p>
-          Duwu ya tiene veterinarias, peluquerías y hoteles cargados con sus coordenadas, ya usa
-          mapas y ya pide la ubicación del usuario — pero solo para entregas. Con eso mismo se puede
-          recomendar el servicio más cercano según dónde está la persona y qué mascota tiene.
-        </p>
-      </div>
     </div>
   </div>
 </section>
@@ -477,8 +523,9 @@
     <span class="sec-label reveal">Lo que ya armé</span>
     <h2 class="reveal">Ya está construido. Juega con los controles.</h2>
     <p class="sec-lede reveal">
-      Cambia el peso, la etapa y el tamaño del saco. Todo se recalcula al momento, con la misma
-      fórmula que corre en la base de datos.
+      Dos piezas que ya armé. La primera calcula cuándo se le acaba la comida a una mascota y
+      arma el mensaje de recompra. La segunda usa la ubicación para recomendar servicios. Las dos
+      se mueven.
     </p>
 
     <div class="lab">
@@ -541,6 +588,51 @@
           <div class="thread" id="thread"></div>
         </div>
         <p class="phone-note" id="phoneNote"></p>
+      </div>
+    </div>
+
+    <div class="geo reveal">
+      <div class="panel">
+        <div class="geo-head">
+          <div>
+            <h3>Servicios cerca</h3>
+            <p class="sub">Duwu ya tiene veterinarias, peluquerías y hoteles con sus coordenadas, ya usa mapas y ya pide la ubicación — pero solo para entregas.</p>
+          </div>
+          <span class="proto">Prototipo</span>
+        </div>
+
+        <div class="ctrl">
+          <span class="lbl">¿Dónde estás? <span class="val" id="zonaOut">Chacao</span></span>
+          <div class="seg" id="segZona" role="group" aria-label="Zona">
+            <button type="button" data-lat="10.4967" data-lon="-66.8544" data-z="Chacao" aria-pressed="true">Chacao</button>
+            <button type="button" data-lat="10.4780" data-lon="-66.8630" data-z="Las Mercedes">Las Mercedes</button>
+            <button type="button" data-lat="10.5040" data-lon="-66.8880" data-z="La Florida">La Florida</button>
+            <button type="button" data-lat="10.4283" data-lon="-66.8264" data-z="El Hatillo">El Hatillo</button>
+            <button type="button" class="btn-loc" id="btnLoc">Usar mi ubicación</button>
+          </div>
+        </div>
+
+        <div class="ctrl" style="margin-bottom:0">
+          <span class="lbl">Tipo de servicio</span>
+          <div class="seg" id="segTipo" role="group" aria-label="Tipo de servicio">
+            <button type="button" data-t="todos" aria-pressed="true">Todos</button>
+            <button type="button" data-t="veterinaria">Veterinaria</button>
+            <button type="button" data-t="peluqueria">Peluquería</button>
+            <button type="button" data-t="hotel">Hotel</button>
+          </div>
+        </div>
+
+        <div class="geo-body">
+          <div class="mapa" id="mapa" aria-hidden="true"></div>
+          <div class="lista" id="lista" role="list" aria-live="polite"></div>
+        </div>
+
+        <p class="geo-note">
+          Los puntos son datos de ejemplo sobre zonas reales de Caracas, no comercios existentes.
+          Lo que importa es el mecanismo: con los servicios y las coordenadas que Duwu ya tiene
+          cargados, más la ubicación que ya pide, esto se conecta a datos reales sin construir nada
+          nuevo.
+        </p>
       </div>
     </div>
 
@@ -709,5 +801,102 @@
   }
 
   render();
+
+  /* ---------- servicios cerca ---------- */
+  (function(){
+    // Datos de ejemplo. Las coordenadas corresponden a zonas reales de Caracas;
+    // los servicios son ilustrativos, no comercios existentes.
+    var SERVICIOS = [
+      {n:"Veterinaria",        z:"Altamira",         t:"veterinaria", lat:10.4956, lon:-66.8503},
+      {n:"Peluquería canina",  z:"Los Palos Grandes",t:"peluqueria",  lat:10.5003, lon:-66.8449},
+      {n:"Hotel para mascotas",z:"La Castellana",    t:"hotel",       lat:10.4986, lon:-66.8583},
+      {n:"Veterinaria",        z:"Las Mercedes",     t:"veterinaria", lat:10.4780, lon:-66.8630},
+      {n:"Peluquería canina",  z:"Sabana Grande",    t:"peluqueria",  lat:10.4920, lon:-66.8760},
+      {n:"Veterinaria",        z:"Los Dos Caminos",  t:"veterinaria", lat:10.5030, lon:-66.8300},
+      {n:"Hotel para mascotas",z:"El Hatillo",       t:"hotel",       lat:10.4283, lon:-66.8264}
+    ];
+
+    var yo = {lat:10.4967, lon:-66.8544, z:"Chacao"}, tipo = "todos";
+    var mapa = document.getElementById("mapa"),
+        lista = document.getElementById("lista"),
+        zonaOut = document.getElementById("zonaOut");
+
+    function km(a, b){                       // haversine
+      var R = 6371, rad = Math.PI/180;
+      var dLat = (b.lat-a.lat)*rad, dLon = (b.lon-a.lon)*rad;
+      var s = Math.sin(dLat/2)*Math.sin(dLat/2) +
+              Math.cos(a.lat*rad)*Math.cos(b.lat*rad)*Math.sin(dLon/2)*Math.sin(dLon/2);
+      return R * 2 * Math.atan2(Math.sqrt(s), Math.sqrt(1-s));
+    }
+
+    function seg(id, apply){
+      var box = document.getElementById(id);
+      box.addEventListener("click", function(ev){
+        var b = ev.target.closest("button");
+        if(!b || b.id === "btnLoc") return;
+        box.querySelectorAll("button").forEach(function(x){ x.removeAttribute("aria-pressed"); });
+        b.setAttribute("aria-pressed","true");
+        apply(b); pinta();
+      });
+    }
+    seg("segZona", function(b){ yo = {lat:+b.dataset.lat, lon:+b.dataset.lon, z:b.dataset.z}; });
+    seg("segTipo", function(b){ tipo = b.dataset.t; });
+
+    document.getElementById("btnLoc").addEventListener("click", function(){
+      var btn = this;
+      if(!navigator.geolocation){ btn.textContent = "No disponible"; btn.disabled = true; return; }
+      btn.textContent = "Buscando…"; btn.disabled = true;
+      navigator.geolocation.getCurrentPosition(function(pos){
+        yo = {lat:pos.coords.latitude, lon:pos.coords.longitude, z:"Tu ubicación"};
+        document.querySelectorAll("#segZona button").forEach(function(x){ x.removeAttribute("aria-pressed"); });
+        btn.textContent = "Usando tu ubicación"; btn.setAttribute("aria-pressed","true");
+        pinta();
+      }, function(){
+        btn.textContent = "Permiso denegado"; btn.disabled = true;
+      }, {timeout:8000});
+    });
+
+    function pinta(){
+      zonaOut.textContent = yo.z;
+      var vis = SERVICIOS.filter(function(s){ return tipo === "todos" || s.t === tipo; })
+                         .map(function(s){ return Object.assign({}, s, {d: km(yo, s)}); })
+                         .sort(function(a,b){ return a.d - b.d; });
+
+      // proyección lineal sobre el recuadro que contiene todo
+      var pts = vis.concat([yo]),
+          laMin = Math.min.apply(null, pts.map(function(p){return p.lat;})),
+          laMax = Math.max.apply(null, pts.map(function(p){return p.lat;})),
+          loMin = Math.min.apply(null, pts.map(function(p){return p.lon;})),
+          loMax = Math.max.apply(null, pts.map(function(p){return p.lon;})),
+          W = 200, H = 130, PAD = 18;
+      function X(lon){ return loMax === loMin ? W/2 : PAD + (lon-loMin)/(loMax-loMin)*(W-2*PAD); }
+      function Y(lat){ return laMax === laMin ? H/2 : PAD + (laMax-lat)/(laMax-laMin)*(H-2*PAD); }
+
+      var svg = '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Mapa de servicios cercanos">';
+      vis.slice(0,3).forEach(function(s){
+        svg += '<line class="lnk" x1="'+X(yo.lon).toFixed(1)+'" y1="'+Y(yo.lat).toFixed(1)+
+               '" x2="'+X(s.lon).toFixed(1)+'" y2="'+Y(s.lat).toFixed(1)+'"/>';
+      });
+      // Los tres más cercanos van numerados; el número enlaza el mapa con la
+      // lista de al lado. Etiquetas de texto no: se solapan entre zonas vecinas.
+      vis.forEach(function(s, i){
+        var cx = X(s.lon).toFixed(1), cy = Y(s.lat).toFixed(1);
+        svg += '<circle class="pt'+(i<3?' near':'')+'" cx="'+cx+'" cy="'+cy+'" r="'+(i<3?6.4:3.2)+'"/>';
+        if(i < 3) svg += '<text class="rnk" x="'+cx+'" y="'+(Y(s.lat)+2.3).toFixed(1)+'">'+(i+1)+'</text>';
+      });
+      svg += '<circle class="me" cx="'+X(yo.lon).toFixed(1)+'" cy="'+Y(yo.lat).toFixed(1)+'" r="5.4"/></svg>';
+      mapa.innerHTML = svg;
+
+      lista.innerHTML = vis.slice(0,3).map(function(s, i){
+        return '<div class="svc'+(i===0?' top':'')+'" role="listitem">' +
+                 '<span class="rk">'+(i+1)+'</span>' +
+                 '<span class="nm">'+s.n+'<span class="zn">'+s.z+'</span></span>' +
+                 '<span class="km">'+s.d.toFixed(1).replace(".",",")+' km</span>' +
+               '</div>';
+      }).join("") || '<div class="svc"><span class="rk">—</span><span class="nm">Sin servicios de ese tipo cerca</span><span class="km"></span></div>';
+    }
+
+    pinta();
+  })();
 })();
 </script>

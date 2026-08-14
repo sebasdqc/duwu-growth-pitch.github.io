@@ -1,0 +1,4 @@
+# Solo se publica pitch/index.html; el resto no hace falta en el CDN
+pitch/src
+demo-reposicion
+README.md
