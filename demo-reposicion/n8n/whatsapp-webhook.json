@@ -1,0 +1,138 @@
+{
+  "name": "Duwu · J6 Webhook de estado y respuestas",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "duwu-wa-status",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "b1000000-0000-4000-8000-000000000001",
+      "name": "Webhook de Meta",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [-460, 300],
+      "webhookId": "duwu-wa-status",
+      "notes": "Registra esta URL en la app de Meta, campo 'messages'. Meta reintenta si no recibe 200 rápido, por eso se responde antes de procesar."
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "EVENT_RECEIVED",
+        "options": {}
+      },
+      "id": "b1000000-0000-4000-8000-000000000002",
+      "name": "Responder 200",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [-240, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Aplana el payload de Meta en filas manejables.\n// Un webhook puede traer estados de entrega o mensajes entrantes.\nconst out = [];\n\nfor (const item of $input.all()) {\n  const entries = item.json.body?.entry ?? item.json.entry ?? [];\n\n  for (const entry of entries) {\n    for (const change of entry.changes ?? []) {\n      const value = change.value ?? {};\n\n      // 1) Actualizaciones de estado de mensajes que enviamos\n      for (const st of value.statuses ?? []) {\n        out.push({\n          json: {\n            kind: 'status',\n            provider_message_id: st.id,\n            status: st.status,          // sent | delivered | read | failed\n            error_reason: st.errors?.[0]?.title ?? null,\n          },\n        });\n      }\n\n      // 2) Mensajes entrantes del usuario\n      for (const msg of value.messages ?? []) {\n        const buttonText =\n          msg.button?.text ??\n          msg.interactive?.button_reply?.title ??\n          null;\n\n        out.push({\n          json: {\n            kind: 'inbound',\n            from: msg.from,\n            provider_message_id: msg.context?.id ?? null,\n            body: msg.text?.body ?? buttonText ?? '',\n            is_affirmative: /^(s[ií]|dale|ok|claro|repetir|s[ií],? repetir)/i.test(\n              (msg.text?.body ?? buttonText ?? '').trim()\n            ),\n          },\n        });\n      }\n    }\n  }\n}\n\nreturn out;"
+      },
+      "id": "b1000000-0000-4000-8000-000000000003",
+      "name": "Aplanar payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-20, 300]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": { "caseSensitive": true, "typeValidation": "strict", "version": 2 },
+                "conditions": [
+                  {
+                    "id": "is-status",
+                    "leftValue": "={{ $json.kind }}",
+                    "rightValue": "status",
+                    "operator": { "type": "string", "operation": "equals" }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "outputKey": "estado"
+            },
+            {
+              "conditions": {
+                "options": { "caseSensitive": true, "typeValidation": "strict", "version": 2 },
+                "conditions": [
+                  {
+                    "id": "is-inbound",
+                    "leftValue": "={{ $json.kind }}",
+                    "rightValue": "inbound",
+                    "operator": { "type": "string", "operation": "equals" }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "outputKey": "respuesta"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b1000000-0000-4000-8000-000000000004",
+      "name": "Estado o respuesta",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [200, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "update message_log\n   set status       = $2,\n       error_reason = $3,\n       updated_at   = now()\n where provider_message_id = $1;",
+        "options": {
+          "queryReplacement": "={{ $json.provider_message_id }},{{ $json.status }},{{ $json.error_reason }}"
+        }
+      },
+      "id": "b1000000-0000-4000-8000-000000000005",
+      "name": "Actualizar estado",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.4,
+      "position": [440, 200],
+      "notes": "Alimenta message_delivered y message_opened de la sección 04 del plan."
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "update message_log m\n   set status     = 'replied',\n       payload    = coalesce(m.payload, '{}'::jsonb)\n                    || jsonb_build_object('reply', $2::text,\n                                          'affirmative', $3::boolean),\n       updated_at = now()\n  from customers c\n where c.id = m.customer_id\n   and replace(c.phone_e164, '+', '') = $1\n   and m.journey = 'J6_reorder'\n   and m.sent_at > now() - interval '7 days';",
+        "options": {
+          "queryReplacement": "={{ $json.from }},{{ $json.body }},{{ $json.is_affirmative }}"
+        }
+      },
+      "id": "b1000000-0000-4000-8000-000000000006",
+      "name": "Registrar respuesta",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.4,
+      "position": [440, 400],
+      "notes": "La respuesta del usuario abre la ventana de servicio de 24 h: a partir de aquí se puede conversar en texto libre y sin plantilla."
+    }
+  ],
+  "connections": {
+    "Webhook de Meta": {
+      "main": [[{ "node": "Responder 200", "type": "main", "index": 0 }]]
+    },
+    "Responder 200": {
+      "main": [[{ "node": "Aplanar payload", "type": "main", "index": 0 }]]
+    },
+    "Aplanar payload": {
+      "main": [[{ "node": "Estado o respuesta", "type": "main", "index": 0 }]]
+    },
+    "Estado o respuesta": {
+      "main": [
+        [{ "node": "Actualizar estado", "type": "main", "index": 0 }],
+        [{ "node": "Registrar respuesta", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Caracas"
+  },
+  "pinData": {}
+}

@@ -1,0 +1,713 @@
+<title>Sebastián Quijada · Product & Lifecycle Growth para Duwu</title>
+
+<!--FONTS-->
+
+<style>
+  :root{
+    /* Tokens tomados del CSS de duwupetclub.com */
+    --navy:#00388b; --blue:#2e9aff; --blue-dp:#1a8ff5; --yellow:#ffd700;
+    --pale:#d8ecff; --pale-2:#e3f2fd;
+
+    --ground:#F2F5F9; --surface:#fff; --surface-2:#EAF2FD;
+    --ink:#0E1A30; --ink-soft:#4E5D78; --ink-faint:#7E8CA6;
+    --rule:#DCE5F2; --rule-2:#BFCFE6;
+    --on-navy:#EAF2FF; --on-navy-soft:#9DBAE6;
+    --ok:#2E7D32; --alert:#C62828;
+    --figure:#00388b; --sel-bg:#00388b; --sel-ink:#fff;
+    --shadow:0 1px 2px rgba(0,56,139,.06),0 10px 30px -14px rgba(0,56,139,.28);
+    --shadow-lg:0 2px 4px rgba(0,56,139,.06),0 24px 60px -24px rgba(0,56,139,.4);
+
+    --display:'Poppins','Avenir Next',Avenir,'Century Gothic',sans-serif;
+    --prose:'Roboto','Helvetica Neue',Arial,sans-serif;
+    --mono:ui-monospace,'SF Mono',SFMono-Regular,Menlo,'Roboto Mono',Consolas,monospace;
+    --r:12px; --r-lg:20px;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --ground:#050D1C; --surface:#0D1930; --surface-2:#132444;
+    --ink:#E9EFFA; --ink-soft:#A3B3CE; --ink-faint:#7286A6;
+    --rule:#1C2C4C; --rule-2:#2C4067;
+    --navy:#0A2F6B; --blue:#5FA8FF; --blue-dp:#7FBAFF;
+    --pale:#122745; --pale-2:#0F2340;
+    --on-navy:#EAF2FF; --on-navy-soft:#9DBAE6;
+    --ok:#66BB6A; --alert:#EF5350;
+    --figure:#7FBAFF; --sel-bg:#5FA8FF; --sel-ink:#06121F;
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 30px -14px rgba(0,0,0,.8);
+    --shadow-lg:0 2px 4px rgba(0,0,0,.5),0 24px 60px -24px rgba(0,0,0,.9);
+  }}
+  :root[data-theme="dark"]{
+    --ground:#050D1C; --surface:#0D1930; --surface-2:#132444;
+    --ink:#E9EFFA; --ink-soft:#A3B3CE; --ink-faint:#7286A6;
+    --rule:#1C2C4C; --rule-2:#2C4067;
+    --navy:#0A2F6B; --blue:#5FA8FF; --blue-dp:#7FBAFF;
+    --pale:#122745; --pale-2:#0F2340;
+    --on-navy:#EAF2FF; --on-navy-soft:#9DBAE6;
+    --ok:#66BB6A; --alert:#EF5350;
+    --figure:#7FBAFF; --sel-bg:#5FA8FF; --sel-ink:#06121F;
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 30px -14px rgba(0,0,0,.8);
+    --shadow-lg:0 2px 4px rgba(0,0,0,.5),0 24px 60px -24px rgba(0,0,0,.9);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--ground);color:var(--ink);
+    font-family:var(--prose);font-size:1.0625rem;line-height:1.65;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 clamp(1.15rem,4vw,2.5rem)}
+
+  h1,h2,h3,.h{font-family:var(--display);letter-spacing:-.03em;text-wrap:balance;margin:0}
+  p{margin:0;text-wrap:pretty}
+  a{color:inherit}
+
+  .eyebrow{
+    font-family:var(--display);font-size:.7rem;font-weight:600;
+    letter-spacing:.16em;text-transform:uppercase;
+  }
+
+  /* ============ HERO ============ */
+  .hero{
+    position:relative;background:var(--navy);color:var(--on-navy);
+    padding:clamp(2rem,5vw,3rem) 0 clamp(3.5rem,9vw,6rem);overflow:hidden;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(70rem 40rem at 88% -10%,rgba(46,154,255,.42),transparent 60%),
+      radial-gradient(40rem 30rem at 0% 110%,rgba(255,215,0,.10),transparent 65%);
+  }
+  .hero .wrap{position:relative}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:clamp(2.5rem,7vw,4.5rem)}
+  .mark{display:flex;align-items:center;gap:.6rem;font-family:var(--display);font-weight:700;font-size:1.02rem;letter-spacing:-.02em}
+  .mark .dot{width:11px;height:11px;border-radius:3px;background:var(--yellow);flex:none}
+  .topbar .role{font-family:var(--display);font-size:.76rem;font-weight:500;color:var(--on-navy-soft);letter-spacing:.02em}
+
+  .hero-grid{display:grid;gap:clamp(2rem,5vw,3.5rem);align-items:center}
+  @media(min-width:900px){.hero-grid{grid-template-columns:1.35fr .65fr}}
+
+  .hero .eyebrow{color:var(--yellow);display:block;margin-bottom:1.1rem}
+  .hero h1{
+    font-size:clamp(2.15rem,6vw,4rem);font-weight:800;line-height:1.02;
+    max-width:16ch;margin-bottom:1.35rem;
+  }
+  .hero h1 em{font-style:normal;color:var(--yellow)}
+  .hero .lede{
+    font-size:clamp(1.02rem,1.9vw,1.19rem);line-height:1.58;
+    color:var(--on-navy-soft);max-width:48ch;margin-bottom:2rem;
+  }
+  .hero .lede b{color:#fff;font-weight:500}
+
+  .cta-row{display:flex;flex-wrap:wrap;gap:.7rem}
+  .btn{
+    display:inline-flex;align-items:center;gap:.5rem;
+    font-family:var(--display);font-size:.9rem;font-weight:600;
+    padding:.78rem 1.35rem;border-radius:99px;text-decoration:none;
+    border:1.5px solid transparent;cursor:pointer;
+    transition:transform .15s ease,box-shadow .15s ease,background .15s ease;
+  }
+  .btn-primary{background:var(--yellow);color:#0E1A30;box-shadow:0 6px 18px -6px rgba(255,215,0,.55)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 26px -8px rgba(255,215,0,.7)}
+  .btn-ghost{border-color:rgba(255,255,255,.32);color:#fff}
+  .btn-ghost:hover{background:rgba(255,255,255,.1);transform:translateY(-2px)}
+
+  .portrait{position:relative;justify-self:center;width:min(300px,74vw);aspect-ratio:1}
+  .portrait img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;
+    border:6px solid rgba(255,255,255,.14);box-shadow:var(--shadow-lg)}
+  .portrait .ring{
+    position:absolute;inset:-14px;border-radius:50%;
+    border:2px dashed rgba(255,215,0,.5);animation:spin 44s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .badge{
+    position:absolute;right:-6px;bottom:12px;background:var(--surface);color:var(--ink);
+    border-radius:99px;padding:.5rem .95rem;box-shadow:var(--shadow-lg);
+    font-family:var(--display);font-size:.76rem;font-weight:600;white-space:nowrap;
+    display:flex;align-items:center;gap:.45rem;
+  }
+  .badge .pulse{width:8px;height:8px;border-radius:50%;background:var(--alert);flex:none;
+    box-shadow:0 0 0 0 rgba(198,40,40,.6);animation:pulse 2.4s infinite}
+  @keyframes pulse{70%{box-shadow:0 0 0 9px rgba(198,40,40,0)}100%{box-shadow:0 0 0 0 rgba(198,40,40,0)}}
+
+  /* ============ SECCIONES ============ */
+  section{padding:clamp(3.25rem,8vw,5.5rem) 0}
+  .sec-label{
+    font-family:var(--display);font-size:.7rem;font-weight:600;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:.55rem;margin-bottom:1rem;
+  }
+  .sec-label::before{content:"";width:9px;height:9px;border-radius:2px;background:var(--yellow);flex:none}
+  h2{font-size:clamp(1.7rem,4vw,2.55rem);font-weight:700;line-height:1.1;max-width:20ch;margin-bottom:1rem}
+  .sec-lede{font-size:1.06rem;color:var(--ink-soft);max-width:56ch;line-height:1.6}
+
+  /* stats */
+  .stats{display:grid;gap:1rem;margin-top:2.5rem}
+  @media(min-width:760px){.stats{grid-template-columns:repeat(3,1fr)}}
+  .stat{
+    background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-lg);
+    padding:1.75rem 1.6rem 1.85rem;box-shadow:var(--shadow);position:relative;overflow:hidden;
+  }
+  .stat::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--blue)}
+  .stat.is-alert::after{background:var(--alert)}
+  .stat .n{font-family:var(--display);font-size:3.4rem;font-weight:800;line-height:1;
+    letter-spacing:-.045em;font-variant-numeric:tabular-nums;display:block;margin-bottom:.6rem}
+  .stat.is-alert .n{color:var(--alert)}
+  .stat .n small{font-size:1.3rem;font-weight:600;color:var(--ink-faint)}
+  .stat .t{font-family:var(--display);font-weight:600;font-size:.98rem;display:block;margin-bottom:.35rem}
+  .stat .d{font-size:.88rem;color:var(--ink-soft);line-height:1.5}
+
+  .after-note{
+    margin-top:1.5rem;padding:1.15rem 1.4rem;border-radius:var(--r);
+    background:var(--pale);border:1px solid var(--rule);
+    font-size:.98rem;color:var(--ink);max-width:64ch;line-height:1.6;
+  }
+  .after-note b{font-weight:500}
+  .after-note .aside{
+    display:block;margin-top:.8rem;padding-top:.8rem;border-top:1px solid var(--rule-2);
+    font-size:.87rem;color:var(--ink-soft);line-height:1.55;
+  }
+
+  /* aportes */
+  .band{background:var(--surface)}
+  .cards{display:grid;gap:1.15rem;margin-top:2.5rem}
+  @media(min-width:820px){.cards{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:1060px){.cards{grid-template-columns:repeat(4,1fr)}}
+  .card{
+    background:var(--ground);border:1px solid var(--rule);border-radius:var(--r-lg);
+    padding:1.7rem 1.6rem 1.8rem;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--rule-2)}
+  .card .ic{
+    width:44px;height:44px;border-radius:13px;background:var(--navy);color:var(--yellow);
+    display:grid;place-items:center;margin-bottom:1.1rem;
+  }
+  .card .ic svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;
+    stroke-linecap:round;stroke-linejoin:round}
+  .card h3{font-size:1.14rem;font-weight:600;margin-bottom:.55rem}
+  .card p{font-size:.93rem;color:var(--ink-soft);line-height:1.6}
+  .card .tag{
+    display:inline-block;margin-top:1rem;font-family:var(--mono);font-size:.71rem;
+    color:var(--blue);background:var(--pale-2);border-radius:99px;padding:.24rem .65rem;
+  }
+
+  /* ============ WIDGET ============ */
+  .demo{background:var(--navy);color:var(--on-navy)}
+  .demo .sec-label{color:var(--yellow)}
+  .demo .sec-label::before{background:var(--yellow)}
+  .demo h2{color:#fff}
+  .demo .sec-lede{color:var(--on-navy-soft)}
+
+  .lab{display:grid;gap:1.5rem;margin-top:2.75rem;align-items:start}
+  @media(min-width:940px){.lab{grid-template-columns:1fr 340px}}
+
+  .panel{background:var(--surface);border-radius:var(--r-lg);padding:1.7rem 1.7rem 1.85rem;box-shadow:var(--shadow-lg);color:var(--ink)}
+  .panel h3{font-size:1.02rem;font-weight:600;margin-bottom:.3rem}
+  .panel .sub{font-size:.86rem;color:var(--ink-faint);margin-bottom:1.6rem}
+
+  .pet-head{display:flex;align-items:center;gap:.85rem;margin-bottom:1.6rem}
+  .pet-head > div{flex:1 1 auto;min-width:0}
+  .pet-head h3{margin-bottom:.15rem}
+  .pet-head .sub{margin-bottom:0}
+  .pet-av{width:46px;height:46px;border-radius:50%;object-fit:cover;flex:none;
+    border:2px solid var(--rule);box-shadow:var(--shadow)}
+  .bag-img{width:52px;height:auto;flex:none;filter:drop-shadow(0 6px 12px rgba(0,56,139,.22))}
+  @media(max-width:420px){.bag-img{display:none}}
+
+  .ctrl{margin-bottom:1.5rem}
+  .ctrl > label,.ctrl .lbl{
+    display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+    font-family:var(--display);font-size:.76rem;font-weight:600;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--ink-faint);margin-bottom:.7rem;
+  }
+  .ctrl .val{font-family:var(--mono);font-size:.92rem;color:var(--figure);letter-spacing:0;text-transform:none;font-weight:700}
+
+  .seg{display:flex;gap:.4rem;flex-wrap:wrap}
+  .seg button{
+    font-family:var(--display);font-size:.85rem;font-weight:500;
+    padding:.5rem .95rem;border-radius:99px;cursor:pointer;
+    background:var(--ground);border:1.5px solid var(--rule);color:var(--ink-soft);
+    transition:all .15s ease;
+  }
+  .seg button:hover{border-color:var(--blue);color:var(--ink)}
+  .seg button[aria-pressed="true"]{background:var(--sel-bg);border-color:var(--sel-bg);color:var(--sel-ink)}
+
+  input[type=range]{
+    -webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:99px;
+    background:linear-gradient(90deg,var(--blue) var(--pct,40%),var(--rule) var(--pct,40%));
+    outline:none;cursor:pointer;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;appearance:none;width:24px;height:24px;border-radius:50%;
+    background:#fff;border:3px solid var(--navy);cursor:grab;box-shadow:var(--shadow);
+  }
+  input[type=range]::-moz-range-thumb{
+    width:24px;height:24px;border-radius:50%;background:#fff;border:3px solid var(--navy);
+    cursor:grab;box-shadow:var(--shadow);
+  }
+
+  .readout{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
+    border:1px solid var(--rule);border-radius:var(--r);overflow:hidden;margin-top:1.9rem;
+  }
+  .readout div{background:var(--surface);padding:1rem .9rem 1.1rem;text-align:center}
+  .readout .k{font-family:var(--display);font-size:.66rem;font-weight:600;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-faint);display:block;margin-bottom:.45rem}
+  .readout .v{font-family:var(--display);font-size:1.45rem;font-weight:700;letter-spacing:-.02em;
+    font-variant-numeric:tabular-nums;display:block;color:var(--figure)}
+  .readout .v small{font-size:.78rem;font-weight:500;color:var(--ink-faint)}
+
+  .formula-line{
+    margin-top:1.4rem;font-family:var(--mono);font-size:.755rem;line-height:1.7;
+    color:var(--ink-faint);background:var(--ground);border-radius:var(--r);
+    padding:.85rem 1rem;overflow-x:auto;white-space:nowrap;
+  }
+  .formula-line b{color:var(--figure);font-weight:700}
+
+  /* teléfono */
+  .phone{
+    background:#0B141A;border-radius:26px;padding:.55rem;box-shadow:var(--shadow-lg);
+    border:1px solid rgba(255,255,255,.12);
+  }
+  .phone-top{
+    background:#1F2C34;border-radius:21px 21px 0 0;padding:.85rem 1rem;
+    display:flex;align-items:center;gap:.65rem;
+  }
+  .phone-top .av{width:34px;height:34px;border-radius:50%;background:#00388b;color:#ffd700;
+    display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:.82rem;flex:none}
+  .phone-top .who{font-family:var(--display);font-size:.86rem;font-weight:600;color:#fff;line-height:1.25}
+  .phone-top .st{font-size:.7rem;color:#8696A0}
+  .thread{
+    background:#0B141A;padding:1.1rem .85rem 1.3rem;min-height:262px;
+    display:flex;flex-direction:column;justify-content:flex-end;gap:.5rem;
+    border-radius:0 0 21px 21px;
+    background-image:radial-gradient(rgba(255,255,255,.035) 1px,transparent 1px);
+    background-size:16px 16px;
+  }
+  .daysep{
+    align-self:center;background:rgba(255,255,255,.08);color:#C9D6DC;
+    font-size:.68rem;font-weight:500;letter-spacing:.04em;
+    padding:.28rem .75rem;border-radius:99px;margin-bottom:.15rem;
+    text-transform:uppercase;
+  }
+  .bubble{
+    background:#005C4B;color:#E9EDEF;border-radius:12px 12px 12px 3px;
+    padding:.7rem .85rem .5rem;font-size:.875rem;line-height:1.5;
+    max-width:92%;box-shadow:0 1px 1px rgba(0,0,0,.3);
+    animation:pop .32s cubic-bezier(.2,.9,.3,1.3) both;
+  }
+  @keyframes pop{from{opacity:0;transform:translateY(9px) scale(.97)}}
+  .bubble .time{font-size:.63rem;color:#8FB3AA;text-align:right;margin-top:.25rem;
+    display:flex;align-items:center;justify-content:flex-end;gap:.25rem}
+  .bubble strong{font-weight:700}
+  .bubble .btns{margin-top:.6rem;display:grid;gap:.28rem}
+  .bubble .btns span{
+    background:rgba(255,255,255,.09);border-radius:7px;text-align:center;
+    padding:.42rem;font-size:.8rem;color:#7FD4C1;font-weight:500;
+  }
+  .phone-note{
+    margin-top:.95rem;font-size:.79rem;color:var(--on-navy-soft);line-height:1.55;text-align:center;
+  }
+
+  .proof{
+    margin-top:2.25rem;display:flex;flex-wrap:wrap;gap:.55rem;
+  }
+  .proof span{
+    font-family:var(--display);font-size:.78rem;font-weight:500;
+    background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);
+    color:var(--on-navy);border-radius:99px;padding:.4rem .85rem;
+    display:inline-flex;align-items:center;gap:.4rem;
+  }
+  .proof span::before{content:"✓";color:var(--yellow);font-weight:700}
+
+  /* ============ POR QUÉ ============ */
+  .why-grid{display:grid;gap:1.15rem;margin-top:2.5rem}
+  @media(min-width:820px){.why-grid{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}}
+  .why{
+    background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-lg);
+    padding:1.6rem 1.6rem 1.7rem;
+  }
+  .why h3{font-size:1.05rem;font-weight:600;margin-bottom:.5rem;display:flex;align-items:center;gap:.55rem}
+  .why h3::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--yellow);flex:none}
+  .why p{font-size:.93rem;color:var(--ink-soft);line-height:1.62}
+  .why.is-honest{background:var(--pale);border-color:var(--rule-2)}
+
+  /* ============ CIERRE ============ */
+  .close{background:var(--surface);text-align:center}
+  .close h2{margin:0 auto 1rem;max-width:22ch}
+  .close .sec-lede{margin:0 auto 2rem}
+  .close .cta-row{justify-content:center}
+  .close .btn-primary{background:var(--navy);color:#fff;box-shadow:0 8px 22px -8px rgba(0,56,139,.6)}
+  .close .btn-ghost{border-color:var(--rule-2);color:var(--ink)}
+  .close .btn-ghost:hover{background:var(--ground)}
+  .foot{
+    border-top:1px solid var(--rule);margin-top:clamp(3rem,7vw,4.5rem);padding:1.75rem 0 2.5rem;
+    font-size:.8rem;color:var(--ink-faint);line-height:1.6;text-align:center;
+  }
+
+  :focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:6px}
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+
+<!-- ==================== HERO ==================== -->
+<header class="hero">
+  <div class="wrap">
+    <div class="topbar">
+      <span class="mark"><span class="dot"></span>Product &amp; Lifecycle Growth</span>
+      <span class="role">Duwu Pet Club</span>
+    </div>
+
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Duwu Pet Club</span>
+        <h1>Duwu ya tiene un club. El problema es que <em>nadie lo ve.</em></h1>
+        <p class="lede">
+          Hace poco hice mi primera compra en Duwu y el recorrido completo, del onboarding a la
+          entrega, me pareció excelente. Llevo <b>5 años en marketing</b>, pasando por growth,
+          análisis de datos y desarrollo de producto, y en todo lo que uso termino viendo puntos de
+          mejora. Más aún en un proyecto que resuelve algo tan necesario en Caracas, y ojalá pronto
+          en toda Venezuela. Acá te dejo lo que vi, y lo que armé con eso.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#demo">Mira lo que armé ↓</a>
+          <a class="btn btn-ghost" href="PLAN_URL" target="_blank" rel="noopener">Ver el plan completo</a>
+        </div>
+      </div>
+
+      <div class="portrait">
+        <span class="ring" aria-hidden="true"></span>
+        <img src="CAT_IMG" alt="Gato, una de las categorías de Duwu Pet Club">
+        <span class="badge"><span class="pulse"></span>0 eventos del club medidos</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ==================== HALLAZGO ==================== -->
+<section id="hallazgo">
+  <div class="wrap">
+    <span class="sec-label reveal">Lo que encontré</span>
+    <h2 class="reveal">Busqué unas 25 herramientas de analítica en el código. Encontré una.</h2>
+    <p class="sec-lede reveal">
+      Es el Meta Pixel, con los siete eventos típicos de una tienda. No hay nada más: ni analítica
+      de producto, ni feature flags, ni grabación de sesión.
+    </p>
+
+    <div class="stats">
+      <div class="stat reveal">
+        <span class="n" data-count="7">0</span>
+        <span class="t">Eventos hoy</span>
+        <span class="d">Todos del Meta Pixel. Sirve para atribuir anuncios, no para entender qué hace la gente dentro del producto.</span>
+      </div>
+      <div class="stat is-alert reveal">
+        <span class="n"><span data-count="0">0</span><small> / 8</small></span>
+        <span class="t">Eventos del club</span>
+        <span class="d">Hoy nadie sabe cuánta gente sube de nivel, canjea una recompensa o comparte su código de referido.</span>
+      </div>
+      <div class="stat is-alert reveal">
+        <span class="n" data-count="0">0</span>
+        <span class="t">Herramientas de experimentación</span>
+        <span class="d">Sin feature flags no se puede correr un A/B test. Falta la herramienta, no es cuestión de método.</span>
+      </div>
+    </div>
+
+    <p class="after-note reveal">
+      <b>Y hay otra cosa:</b> todo el club está detrás del registro, y registrarse es obligatorio
+      para poder agregar algo al carrito. O sea que lo que haría que alguien se quede está escondido
+      justo detrás de lo que más le cuesta hacer.
+      <span class="aside">Puede ser una decisión propia del producto que yo no alcanzo a ver desde
+      afuera. Lo pongo como apreciación de usuario, no como diagnóstico.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ==================== APORTES ==================== -->
+<section class="band" id="aporto">
+  <div class="wrap">
+    <span class="sec-label reveal">Lo que puedo aportar</span>
+    <h2 class="reveal">Cuatro cosas que puedo aportar</h2>
+    <p class="sec-lede reveal">
+      Las tres primeras van en ese orden y el orden importa: si no mides, no sabes qué optimizar,
+      y si la gente ni llega a comprar no hay nada que retener. La cuarta es una idea aparte, armada
+      con piezas que ustedes ya tienen.
+    </p>
+
+    <div class="cards">
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></div>
+        <h3>Medir</h3>
+        <p>
+          Armar el plan de eventos, propiedades y feature flags. Primero el embudo completo,
+          después el club. Mientras esto no exista, todo lo demás es opinión.
+        </p>
+      </div>
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14L21 3"/><path d="M21 14v5a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h5"/></svg></div>
+        <h3>Activar</h3>
+        <p>
+          Sacar el club de detrás del registro y dejar que la gente arme su carrito sin cuenta.
+          Que primero se le ofrezca algo y después se le pidan los datos.
+        </p>
+      </div>
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-3-6.7"/><path d="M21 3v6h-6"/></svg></div>
+        <h3>Retener</h3>
+        <p>
+          La comida se acaba en una fecha que se puede calcular. Convertir eso en recompra
+          automática por WhatsApp, con un grupo de control para saber si de verdad está sumando.
+        </p>
+      </div>
+      <div class="card reveal">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
+        <h3>Servicios cerca</h3>
+        <p>
+          Duwu ya tiene veterinarias, peluquerías y hoteles cargados con sus coordenadas, ya usa
+          mapas y ya pide la ubicación del usuario — pero solo para entregas. Con eso mismo se puede
+          recomendar el servicio más cercano según dónde está la persona y qué mascota tiene.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== DEMO ==================== -->
+<section class="demo" id="demo">
+  <div class="wrap">
+    <span class="sec-label reveal">Lo que ya armé</span>
+    <h2 class="reveal">Ya está construido. Juega con los controles.</h2>
+    <p class="sec-lede reveal">
+      Cambia el peso, la etapa y el tamaño del saco. Todo se recalcula al momento, con la misma
+      fórmula que corre en la base de datos.
+    </p>
+
+    <div class="lab">
+      <div class="panel reveal">
+        <div class="pet-head">
+          <img class="pet-av" src="DOG_IMG" alt="">
+          <div>
+            <h3>Rocky · perfil de mascota</h3>
+            <p class="sub">Dos datos que Duwu ya pide y hoy no usa para nada.</p>
+          </div>
+          <img class="bag-img" src="BAG_IMG" alt="Saco de alimento Dog Chow">
+        </div>
+
+        <div class="ctrl">
+          <span class="lbl">Etapa de vida</span>
+          <div class="seg" id="segStage" role="group" aria-label="Etapa de vida">
+            <button type="button" data-f="0.030" data-l="Cachorro">Cachorro</button>
+            <button type="button" data-f="0.020" data-l="Adulto" aria-pressed="true">Adulto</button>
+            <button type="button" data-f="0.018" data-l="Senior">Senior</button>
+          </div>
+        </div>
+
+        <div class="ctrl">
+          <label class="lbl" for="wt">Peso <span class="val" id="wtOut">20 kg</span></label>
+          <input type="range" id="wt" min="2" max="45" step="1" value="20"
+                 aria-describedby="wtOut">
+        </div>
+
+        <div class="ctrl" style="margin-bottom:0">
+          <span class="lbl">Presentación comprada</span>
+          <div class="seg" id="segBag" role="group" aria-label="Tamaño del saco">
+            <button type="button" data-kg="1.5">1,5 kg</button>
+            <button type="button" data-kg="4">4 kg</button>
+            <button type="button" data-kg="8" aria-pressed="true">8 kg</button>
+            <button type="button" data-kg="20">20 kg</button>
+          </div>
+        </div>
+
+        <div class="readout">
+          <div><span class="k">Consumo</span><span class="v" id="oGrams">400<small> g/día</small></span></div>
+          <div><span class="k">Cobertura</span><span class="v" id="oDays">20<small> días</small></span></div>
+          <div><span class="k">Aviso</span><span class="v" id="oWhen">día 15</span></div>
+        </div>
+
+        <div class="formula-line">
+          <b>gramos_día</b> = peso × factor · <b>cobertura</b> = saco ÷ gramos_día ·
+          <b>aviso</b> = compra + cobertura − 5 días
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="phone">
+          <div class="phone-top">
+            <span class="av">D</span>
+            <span>
+              <span class="who">Duwu Pet Club</span><br>
+              <span class="st">en línea</span>
+            </span>
+          </div>
+          <div class="thread" id="thread"></div>
+        </div>
+        <p class="phone-note" id="phoneNote"></p>
+      </div>
+    </div>
+
+    <div class="proof reveal">
+      <span>Probado contra PostgreSQL&nbsp;18</span>
+      <span>Un 20 % de control que no recibe nada</span>
+      <span>Tope de 2 mensajes por semana</span>
+      <span>Flujo de n8n y plantillas de WhatsApp escritos</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== POR QUÉ YO ==================== -->
+<section id="porque">
+  <div class="wrap">
+    <span class="sec-label reveal">Por qué yo</span>
+    <h2 class="reveal">De dónde vengo</h2>
+
+    <div class="why-grid">
+      <div class="why is-honest reveal">
+        <h3>No vengo de tech, y prefiero decirlo yo</h3>
+        <p>
+          Hay que ser sincero: no vengo de tech, ni de marketplaces, ni soy ex Chewy. Pero de
+          donde vengo he creado sistemas, he experimentado y he construido desde cero. Si cambiamos
+          los KPIs con los que llevo años trabajando por alargar el LTV, reducir el churn y subir
+          las activaciones, pueden salir cosas interesantes.
+        </p>
+      </div>
+      <div class="why reveal">
+        <h3>Con qué trabajo todos los días</h3>
+        <p>
+          Claude Code y Supabase a diario. Creé un CRM a la medida y he desplegado productos en
+          DigitalOcean. Todo con estándares de medición y experimentación, iterando hasta llegar a
+          lo que esperábamos.
+        </p>
+      </div>
+      <div class="why reveal">
+        <h3>Sobre el plan que traigo</h3>
+        <p>
+          No es necesariamente lo que Duwu necesita hoy. Es en lo que he trabajado, y claramente
+          no estoy cerrado a seguir aprendiendo y a aportar con todo el ownership y el crecimiento
+          que se espera en una startup.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CIERRE ==================== -->
+<section class="close">
+  <div class="wrap">
+    <span class="sec-label reveal" style="justify-content:center">Hablemos</span>
+    <h2 class="reveal">El primer experimento nos está esperando</h2>
+    <p class="sec-lede reveal">
+      Meterle los puntos ganados y el progreso de nivel al mensaje de confirmación que ya
+      mandan. No cuesta nada, no hay que instrumentar nada nuevo, y sirve para saber si el club de
+      verdad hace que la gente vuelva a comprar.
+    </p>
+    <div class="cta-row reveal">
+      <a class="btn btn-primary" href="mailto:TU_EMAIL?subject=Product%20%26%20Lifecycle%20Growth%20%C2%B7%20Duwu">Escríbeme</a>
+      <a class="btn btn-ghost" href="PLAN_URL" target="_blank" rel="noopener">Leer el plan completo</a>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- animaciones de entrada ---------- */
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+  },{threshold:.14, rootMargin:"0px 0px -40px 0px"});
+  document.querySelectorAll(".reveal").forEach(function(el,i){
+    el.style.transitionDelay = (Math.min(i%3,2)*70) + "ms";
+    io.observe(el);
+  });
+
+  /* ---------- contadores ---------- */
+  var cio = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el = e.target, end = +el.dataset.count, t0 = null;
+      if(end === 0){ el.textContent = "0"; cio.unobserve(el); return; }
+      function step(t){
+        if(!t0) t0 = t;
+        var p = Math.min((t-t0)/900, 1);
+        el.textContent = Math.round(end * (1 - Math.pow(1-p,3)));
+        if(p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+      cio.unobserve(el);
+    });
+  },{threshold:.6});
+  document.querySelectorAll("[data-count]").forEach(function(el){ cio.observe(el); });
+
+  /* ---------- calculadora ---------- */
+  var wt = document.getElementById("wt"),
+      wtOut = document.getElementById("wtOut"),
+      thread = document.getElementById("thread"),
+      state = { factor:0.020, stage:"Adulto", bag:8, weight:20 };
+
+  var MES = ["enero","febrero","marzo","abril","mayo","junio","julio",
+             "agosto","septiembre","octubre","noviembre","diciembre"];
+
+  function segSetup(id, apply){
+    var box = document.getElementById(id);
+    box.addEventListener("click", function(ev){
+      var b = ev.target.closest("button");
+      if(!b) return;
+      box.querySelectorAll("button").forEach(function(x){ x.removeAttribute("aria-pressed"); });
+      b.setAttribute("aria-pressed","true");
+      apply(b);
+      render();
+    });
+  }
+  segSetup("segStage", function(b){ state.factor = +b.dataset.f; state.stage = b.dataset.l; });
+  segSetup("segBag",   function(b){ state.bag = +b.dataset.kg; });
+
+  wt.addEventListener("input", function(){
+    state.weight = +wt.value;
+    render();
+  });
+
+  function nf(n, d){ return n.toLocaleString("es-VE",{minimumFractionDigits:d||0, maximumFractionDigits:d||0}); }
+
+  function render(){
+    /* barra de progreso del slider */
+    var pct = (state.weight - wt.min) / (wt.max - wt.min) * 100;
+    wt.style.setProperty("--pct", pct + "%");
+    wtOut.textContent = state.weight + " kg";
+
+    var grams = state.weight * state.factor * 1000;
+    var days  = state.bag * 1000 / grams;
+    var notify = Math.max(1, Math.round(days - 5));
+
+    document.getElementById("oGrams").innerHTML = nf(grams) + "<small> g/día</small>";
+    var dTxt = Math.abs(days - Math.round(days)) < 0.05 ? nf(Math.round(days)) : nf(days,1);
+    document.getElementById("oDays").innerHTML  = dTxt + "<small> días</small>";
+    document.getElementById("oWhen").textContent = "día " + notify;
+
+    /* frase de tiempo restante, igual que en SQL */
+    var left = Math.round(days - notify);
+    var frase = left <= 3 ? "muy poquito" : left <= 7 ? "una semana"
+              : left <= 14 ? "dos semanas" : left + " días";
+
+    var d = new Date(); d.setDate(d.getDate() + notify);
+    var fecha = d.getDate() + " de " + MES[d.getMonth()];
+    var hora = new Date().toLocaleTimeString("es-VE",{hour:"2-digit",minute:"2-digit"});
+
+    thread.innerHTML =
+      '<div class="daysep">' + fecha + '</div>' +
+      '<div class="bubble">' +
+        'Hola María 👋 Según lo que compraste, calculamos que a <strong>Rocky</strong> ' +
+        'le queda <strong>' + frase + '</strong> de Dog Chow Adultos.' +
+        '<div class="btns"><span>Sí, repetir pedido</span><span>Ahora no</span></div>' +
+        '<div class="time">' + hora + ' ✓✓</div>' +
+      '</div>';
+
+    document.getElementById("phoneNote").innerHTML =
+      'Se enviaría el <strong style="color:#fff">' + fecha + '</strong>, a los ' + notify +
+      ' días de la compra. Siempre queda como una semana porque le dejo 5 días de colchón a propósito.';
+
+    thread.setAttribute("aria-label",
+      "Mensaje de ejemplo que se enviaría el " + fecha + ", a los " + notify + " días de la compra.");
+  }
+
+  render();
+})();
+</script>

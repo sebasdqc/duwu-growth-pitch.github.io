@@ -1,0 +1,9 @@
+# Ajustes locales del entorno, no del proyecto
+.claude/settings.local.json
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
