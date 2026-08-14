@@ -75,13 +75,27 @@ acceso a sistemas internos. Es lo que puede verificar cualquiera desde afuera, y
 por eso tiene límites: no cubre las apps nativas, ni el backend, ni herramientas
 internas que no se vean desde el navegador.
 
+## Dónde está publicada
+
+| | |
+|---|---|
+| **Vercel (recomendado)** | <https://duwu-growth-pitch.vercel.app> — sirve `pitch/` directo, con cabeceras de seguridad y `noindex` |
+| GitHub Pages | <https://sebasdqc.github.io/duwu-growth-pitch.github.io/pitch/> — sirve el repo entero, así que la raíz muestra este README y la landing queda bajo `/pitch/` |
+
+El deploy en Vercel se rehace con `vercel deploy --prod` desde la raíz. Para que
+se dispare solo con cada push hay que conectar el repositorio desde el panel de
+Vercel (Settings → Git).
+
 ## Notas de terceros
 
-Este repositorio es **privado** a propósito. Antes de hacerlo público, considerar:
+Este repositorio es **público**. Vale la pena tener presente qué implica:
 
 - `pitch/index.html` incrusta tres imágenes tomadas del sitio de Duwu (una foto
   de categoría, otra de mascota y una de producto).
 - Las tipografías incrustadas son Roboto (Apache-2.0) y Poppins (SIL OFL 1.1).
-  Ambas licencias permiten redistribuirlas; las de Duwu no cambian eso.
-- El material describe hallazgos sobre el producto de un tercero antes de que se
-  los hayan presentado.
+  Ambas licencias permiten redistribuirlas.
+- El material describe hallazgos sobre el producto de un tercero. La landing
+  lleva `noindex`, pero eso no aplica al repositorio: el código y este README sí
+  son indexables y cualquiera puede encontrarlos.
+- Los datos de `demo-reposicion/sql/03-seed.sql` son ficticios, y los servicios
+  del widget de geolocalización son de ejemplo, no comercios reales.
