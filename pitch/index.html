@@ -1,3 +1,22 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#00388b">
+<meta name="description" content="Duwu vende por web, iOS y Android. Análisis y propuesta para estandarizar la medición entre las tres, con dos herramientas ya construidas.">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_VE">
+<meta property="og:url" content="https://duwu-growth-pitch.vercel.app">
+<meta property="og:title" content="Tres superficies. Una sola forma de medir.">
+<meta property="og:description" content="Duwu vende por web, iOS y Android. Análisis y propuesta para estandarizar la medición entre las tres, con dos herramientas ya construidas.">
+<meta property="og:image" content="https://duwu-growth-pitch.vercel.app/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
 <meta name="robots" content="noindex, nofollow">
 <title>Sebastián Quijada · Product & Lifecycle Growth para Duwu</title>
 
@@ -63,8 +82,9 @@
     margin:0;background:var(--ground);color:var(--ink);
     font-family:var(--prose);font-size:1.0625rem;line-height:1.65;
     -webkit-font-smoothing:antialiased;overflow-x:hidden;
+    -webkit-text-size-adjust:100%;text-size-adjust:100%;
   }
-  .wrap{max-width:1120px;margin:0 auto;padding:0 clamp(1.15rem,4vw,2.5rem)}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
 
   h1,h2,h3,.h{font-family:var(--display);letter-spacing:-.03em;text-wrap:balance;margin:0}
   p{margin:0;text-wrap:pretty}
@@ -120,7 +140,7 @@
   .btn-ghost{border-color:rgba(255,255,255,.32);color:#fff}
   .btn-ghost:hover{background:rgba(255,255,255,.1);transform:translateY(-2px)}
 
-  .portrait{position:relative;justify-self:center;width:min(300px,74vw);aspect-ratio:1}
+  .portrait{position:relative;justify-self:center;width:min(300px,62vw);aspect-ratio:1;margin:14px}
   .portrait img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;
     border:6px solid rgba(255,255,255,.14);box-shadow:var(--shadow-lg)}
   .portrait .ring{
@@ -213,10 +233,13 @@
   .demo h2{color:#fff}
   .demo .sec-lede{color:var(--on-navy-soft)}
 
-  .lab{display:grid;gap:1.5rem;margin-top:2.75rem;align-items:start}
-  @media(min-width:940px){.lab{grid-template-columns:1fr 340px}}
+  .lab{display:grid;gap:1.5rem;margin-top:2.75rem;align-items:start;
+    grid-template-columns:minmax(0,1fr)}
+  .lab > *{min-width:0}
+  @media(min-width:940px){.lab{grid-template-columns:minmax(0,1fr) 340px}}
 
-  .panel{background:var(--surface);border-radius:var(--r-lg);padding:1.7rem 1.7rem 1.85rem;box-shadow:var(--shadow-lg);color:var(--ink)}
+  .panel{background:var(--surface);border-radius:var(--r-lg);padding:1.7rem 1.7rem 1.85rem;
+    box-shadow:var(--shadow-lg);color:var(--ink);min-width:0}
   .panel h3{font-size:1.02rem;font-weight:600;margin-bottom:.3rem}
   .panel .sub{font-size:.86rem;color:var(--ink-faint);margin-bottom:1.6rem}
 
@@ -429,6 +452,63 @@
     font-size:.8rem;color:var(--ink-faint);line-height:1.6;text-align:center;
   }
 
+  /* ============ MÓVIL ============ */
+  @media (max-width:640px){
+    section{padding:2.75rem 0}
+    h2{font-size:1.62rem;max-width:none}
+    .sec-lede{font-size:1rem}
+    .hero{padding-bottom:2.75rem}
+    .topbar{margin-bottom:2rem}
+    .hero h1{font-size:2.05rem;max-width:none}
+    .hero .lede{font-size:1rem;margin-bottom:1.6rem}
+    .cta-row .btn{flex:1 1 100%;justify-content:center}
+
+    .stats,.cards,.why-grid{gap:.85rem}
+    .stat{padding:1.35rem 1.25rem 1.45rem;border-radius:var(--r)}
+    .card,.why{padding:1.35rem 1.25rem 1.45rem;border-radius:var(--r)}
+    .card:hover,.why:hover{transform:none}
+
+    .lab{margin-top:2rem;gap:1.1rem}
+    .panel{padding:1.25rem 1.15rem 1.4rem;border-radius:var(--r)}
+    .pet-head{gap:.7rem}
+    .pet-av{width:40px;height:40px}
+    .bag-img{width:42px}
+
+    /* Los grupos de botones se deslizan en horizontal en vez de apilarse
+       en tres filas: ocupa menos y se siente nativo en el teléfono. */
+    .seg{flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x proximity;
+      -webkit-overflow-scrolling:touch;padding-bottom:.3rem;margin:0 -.15rem;
+      scrollbar-width:none}
+    .seg::-webkit-scrollbar{display:none}
+    .seg button{flex:none;scroll-snap-align:start;padding:.5rem .8rem;font-size:.8rem}
+
+    .readout{grid-template-columns:1fr 1fr;margin-top:1.4rem}
+    .readout div:first-child{grid-column:1 / -1}
+    .readout .v{font-size:1.3rem}
+
+    /* En pantalla chica la fórmula se lee mejor envuelta que desplazándose */
+    .formula-line{white-space:normal;line-height:1.9;font-size:.72rem}
+    .panel-note{font-size:.8rem}
+
+    .geo-body{gap:1rem}
+    .svc{grid-template-columns:1.6rem 1fr auto;padding:.6rem .7rem;gap:.55rem}
+    .svc .nm{font-size:.83rem}
+    .svc .mod{margin-left:0;margin-top:.2rem;display:inline-block}
+    .svc.top{transform:none}
+
+    .phone{border-radius:20px}
+    .thread{min-height:210px}
+
+    .proof{gap:.45rem}
+    .proof span{font-size:.74rem;padding:.35rem .7rem}
+  }
+
+  @media (max-width:344px){
+    .hero h1{font-size:1.8rem}
+    .readout{grid-template-columns:1fr}
+    .readout div:first-child{grid-column:auto}
+  }
+
   :focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:6px}
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.3,1)}
   .reveal.in{opacity:1;transform:none}
@@ -437,13 +517,13 @@
     .reveal{opacity:1;transform:none}
   }
 </style>
-
+</head>
+<body>
 <!-- ==================== HERO ==================== -->
 <header class="hero">
   <div class="wrap">
     <div class="topbar">
       <span class="mark"><span class="dot"></span>Product &amp; Lifecycle Growth</span>
-      <span class="role">Duwu Pet Club</span>
     </div>
 
     <div class="hero-grid">
@@ -971,3 +1051,5 @@
   })();
 })();
 </script>
+</body>
+</html>
